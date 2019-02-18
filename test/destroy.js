@@ -4,14 +4,16 @@ const common = require('./common');
 
 async function main() {
 
-   const { keywords } = await common().catch(error => {
+   const { tasks } = await common().catch(error => {
       console.log(error)
    })
 
-   const result = await keywords.destroy({
+   const result = await tasks.destroy({
       where: {
          id: 1
       }
+   }).catch(error => {
+      console.log(error)
    })
 
    console.log(result)

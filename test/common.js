@@ -8,7 +8,7 @@ async function main() {
       db: {
          host: 'localhost',
          database: 'test',
-         user: 'xiangla',
+         username: 'xiangla',
          password: '*ns99*621',
          port: 5432,
       },
@@ -17,29 +17,30 @@ async function main() {
 
    await client.connect()
 
-   const { CHAR, INTEGER, JSONB, BOOLEAN } = Ormv.Type
+   const { CHAR, STRING, INTEGER, JSONB, BOOLEAN } = Ormv.Type
 
-   const keywords = client.define('tasks', {
+   const tasks = client.define('tasks', {
       'id': {
          type: INTEGER,
          primaryKey: true,
       },
-      'keyword': {
-         type: CHAR,
-         validate: {
-            isEmail: true
-         }
-      },
-      'input': {
+      'keywords': {
          type: JSONB,
          validate: {
             "area": {
-               type: CHAR
+               type: String
             },
             'state': {
-               type: BOOLEAN,
-               defaultValue: true
+               type: Boolean,
+               defaultValue: false
             }
+         }
+      },
+      'email': {
+         type: STRING,
+         validate: {
+            isEmail: true,
+            // isInt: true
          }
       },
       "area": {
@@ -52,7 +53,7 @@ async function main() {
    })
 
    return {
-      keywords
+      tasks
    }
 
 }

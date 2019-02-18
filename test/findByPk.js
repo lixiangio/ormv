@@ -8,11 +8,8 @@ async function main() {
       console.log(error)
    })
 
-   const result = await tasks.findOne({
-      order: {
-         "tasks.id": "DESC",
-         "tasks.keywords": "DESC"
-      }
+   const result = await tasks.findByPk(6, {
+      attributes: ['id', 'keywords']
    }).catch(error => {
       console.log(error)
    })

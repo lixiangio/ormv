@@ -8,11 +8,11 @@ test('findAll', async t => {
 
    async function main() {
 
-      const { keywords } = await common().catch(error => {
+      const { tasks } = await common().catch(error => {
          console.log(error)
       })
 
-      const result = await keywords.findAll({
+      const result = await tasks.findAll({
          attributes: [
             'id',
             'keywords',
@@ -26,6 +26,8 @@ test('findAll', async t => {
             "tasks.keywords": "DESC"
          },
          // group: ['platform']
+      }).catch(error => {
+         console.log(error)
       })
 
       t.ok(result)
@@ -34,7 +36,7 @@ test('findAll', async t => {
 
    }
 
-   await main().catch(function (error) {
+   await main().catch(error => {
       console.log(error)
    })
 
@@ -44,11 +46,11 @@ test('findAll Group', async t => {
 
    async function main() {
 
-      const { keywords } = await common().catch(error => {
+      const { tasks } = await common().catch(error => {
          console.log(error)
       })
 
-      const result = await keywords.findAll({
+      const result = await tasks.findAll({
          attributes: [
             'id',
             'keywords',

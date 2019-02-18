@@ -4,7 +4,7 @@ const common = require('./common')
 
 async function main() {
 
-   const { keywords } = await common().catch(error => {
+   const { tasks } = await common().catch(error => {
       console.log(error)
    })
 
@@ -14,12 +14,14 @@ async function main() {
       }
    }
 
-   const result = await keywords.insert(data)
+   const result = await tasks.insert(data).catch(error => {
+      console.log(error)
+   })
 
    console.log(result)
 
 }
 
-main().catch(function (error) {
+main().catch(error => {
    console.log(error)
 })

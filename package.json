@@ -1,12 +1,13 @@
 {
   "name": "ormv",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
   "dependencies": {
     "dayjs": "^1.8.6",
     "pg": "^7.8.0",
-    "typea": "^4.4.3"
+    "typea": "^4.4.3",
+    "validator": "^10.11.0"
   },
   "devDependencies": {},
   "scripts": {

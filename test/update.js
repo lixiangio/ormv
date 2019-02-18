@@ -4,25 +4,25 @@ const test = require('jtf');
 const Ormv = require('..');
 const common = require('./common');
 
-test.skip('update JSON', async t => {
+test('update JSON', async t => {
 
    async function main() {
 
-      const { keywords } = await common().catch(error => {
+      const { tasks } = await common().catch(error => {
          console.log(error)
       })
 
       const data = {
-         keywords: {
-            p: 666
-         }
+         email: "adb@qq.com"
       }
 
-      const result = await keywords.update({
+      const result = await tasks.update({
          where: {
-            id: 1
+            id: 6
          }
-      }, data)
+      }, data).catch(function (error) {
+         console.log(error)
+      })
 
       t.ok(result)
 
@@ -41,7 +41,7 @@ test('update JSON || 合并', async t => {
 
    async function main() {
 
-      const { keywords } = await common().catch(error => {
+      const { tasks } = await common().catch(error => {
          console.log(error)
       })
 
@@ -49,15 +49,20 @@ test('update JSON || 合并', async t => {
 
       const data = {
          keywords: {
-            [merge]: { "q": 568 }
+            [merge]: {
+               "area": "568",
+               "state": true
+            }
          }
       }
 
-      const result = await keywords.update({
+      const result = await tasks.update({
          where: {
             id: 2
          }
-      }, data)
+      }, data).catch(function (error) {
+         console.log(error)
+      })
 
       t.ok(result)
 
@@ -72,11 +77,11 @@ test('update JSON || 合并', async t => {
 })
 
 
-test.skip('update JSON Insert', async t => {
+test('update JSON Insert', async t => {
 
    async function main() {
 
-      const { keywords } = await common().catch(error => {
+      const { tasks } = await common().catch(error => {
          console.log(error)
       })
 
@@ -93,11 +98,13 @@ test.skip('update JSON Insert', async t => {
          }
       }
 
-      const result = await keywords.update({
+      const result = await tasks.update({
          where: {
             id: 4
          }
-      }, data)
+      }, data).catch(error => {
+         console.log(error)
+      })
 
       t.ok(result)
 
@@ -105,7 +112,7 @@ test.skip('update JSON Insert', async t => {
 
    }
 
-   await main().catch(function (error) {
+   await main().catch(error => {
       console.log(error)
    })
 
