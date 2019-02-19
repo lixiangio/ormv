@@ -16,7 +16,7 @@ test('findAll', async t => {
          attributes: [
             'id',
             'keywords',
-            // `COUNT(platform) as xx`
+            `platform as xx`
          ],
          where: {
             id: 1

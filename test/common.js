@@ -43,13 +43,13 @@ async function main() {
             // isInt: true
          }
       },
-      "area": {
-         type: STRING
-      },
-      'state': {
-         type: BOOLEAN,
-         defaultValue: true
-      }
+      // "area": {
+      //    type: STRING
+      // },
+      // 'state': {
+      //    type: BOOLEAN,
+      //    defaultValue: true
+      // }
    })
 
    return {

@@ -1,7 +1,7 @@
 {
   "name": "ormv",
-  "version": "0.0.3",
-  "description": "",
+  "version": "0.1.0-alpha.1",
+  "description": "Postgresql ORM库，为简化JSON操作定制",
   "main": "index.js",
   "dependencies": {
     "dayjs": "^1.8.6",

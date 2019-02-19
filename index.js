@@ -2,16 +2,15 @@
 
 const { Client } = require('pg');
 const Model = require('./lib/model');
-const Op = require('./lib/options');
+const Op = require('./lib/operator');
 const Type = require('./lib/type');
 
 class Ormv extends Client {
    constructor(options) {
-      const {db} =options
+      const { db, logger } = options
       db.user = db.username
       super(db)
       this.models = {}
-      const { logger } = options
       if (logger === true) {
          this.logger = function (sql) {
             console.log('\x1b[33m[pgsql]', `\x1b[32m${sql}\x1b[39m`);

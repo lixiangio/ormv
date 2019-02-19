@@ -16,12 +16,32 @@ test('update JSON', async t => {
          email: "adb@qq.com"
       }
 
+      const { Op } = Ormv
+
       const result = await tasks.update({
          where: {
-            id: 6
+            id: 6,
+            keywords: {
+               [Op.in]: [1, 2]
+            },
+            [Op.or]: [
+               {
+                  email: {
+                     [Op.eq]: "xxx@jj.com"
+                  },
+                  device: {},
+               },
+               {
+                  platform: {},
+               }
+            ],
          }
       }, data).catch(function (error) {
-         console.log(error)
+         let { message } = error
+         return {
+            code: 1000,
+            message
+         }
       })
 
       t.ok(result)
@@ -51,7 +71,7 @@ test('update JSON || 合并', async t => {
          keywords: {
             [merge]: {
                "area": "568",
-               "state": true
+               "state": false
             }
          }
       }
@@ -61,7 +81,11 @@ test('update JSON || 合并', async t => {
             id: 2
          }
       }, data).catch(function (error) {
-         console.log(error)
+         let { message } = error
+         return {
+            code: 1000,
+            message
+         }
       })
 
       t.ok(result)
@@ -87,12 +111,13 @@ test('update JSON Insert', async t => {
 
       const { insert } = Ormv.Op
 
-      const data = {
+      const update = {
          keywords: {
             [insert]: {
                path: "{0}",
                value: {
-                  random: Math.random()
+                  "area": "568",
+                  "state": false
                }
             }
          }
@@ -102,8 +127,12 @@ test('update JSON Insert', async t => {
          where: {
             id: 4
          }
-      }, data).catch(error => {
-         console.log(error)
+      }, update).catch(error => {
+         let { message } = error
+         return {
+            code: 1000,
+            message
+         }
       })
 
       t.ok(result)
