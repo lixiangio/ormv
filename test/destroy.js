@@ -1,25 +1,32 @@
 'use strict'
 
+const test = require('jtf');
 const common = require('./common');
 
-async function main() {
+test('destroy', async t => {
 
-   const { tasks } = await common().catch(error => {
+   async function main() {
+
+      const { tasks } = await common().catch(error => {
+         console.log(error)
+      })
+
+      const result = await tasks.destroy({
+         where: {
+            id: 1
+         }
+      }).catch(error => {
+         console.log(error)
+      })
+
+      t.ok(true)
+
+      console.log(result)
+
+   }
+
+   main().catch(function (error) {
       console.log(error)
    })
 
-   const result = await tasks.destroy({
-      where: {
-         id: 1
-      }
-   }).catch(error => {
-      console.log(error)
-   })
-
-   console.log(result)
-
-}
-
-main().catch(function (error) {
-   console.log(error)
 })

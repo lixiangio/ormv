@@ -1,5 +1,7 @@
 ## ormv
 
+基于pg模块封装的orm模型
+
 ### Install
 
 ```
@@ -11,6 +13,7 @@ npm install ormv
 ```js
 async function main() {
 
+   // 数据库参数配置
    const client = new Ormv({
       db: {
          host: 'localhost',
@@ -22,10 +25,15 @@ async function main() {
       logger: true
    })
 
+   // 连接数据库
    await client.connect()
+
+   // sql查询，支持参数化查询
+   await client.query(sql)
 
    const { CHAR, INTEGER, JSONB, BOOLEAN } = Ormv.Type
 
+   // 数据表建模
    const tasks = client.define('tasks', {
       'id': {
          type: INTEGER,
@@ -42,6 +50,7 @@ async function main() {
       },
    })
 
+   // 基于数据模型的结构化查询
    await tasks.findAll()
 
    await tasks.findOne()
@@ -50,6 +59,7 @@ async function main() {
 
 }
 ```
+
 ### API
 
 #### model.insert(data)
@@ -100,5 +110,3 @@ where参数值的第一层仅支持逻辑运算符(and、or)，比较运算符�
 #### options.limit
 
 #### options.offset
-
-

@@ -10,12 +10,17 @@ async function main() {
 
    const data = {
       keywords: {
-         random: Math.random()
+         random: Math.random(),
+         abs: `k'k'kk"k<script type="text/javascript" src="/app.js"></script>`
       }
    }
 
    const result = await tasks.insert(data).catch(error => {
-      console.log(error)
+      let { message } = error
+      return {
+         code: 1000,
+         message
+      }
    })
 
    console.log(result)

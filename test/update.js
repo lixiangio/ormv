@@ -70,7 +70,7 @@ test('update JSON || 合并', async t => {
       const data = {
          keywords: {
             [merge]: {
-               "area": "568",
+               "area": "5'68",
                "state": false
             }
          }
@@ -116,7 +116,7 @@ test('update JSON Insert', async t => {
             [insert]: {
                path: "{0}",
                value: {
-                  "area": "568",
+                  "area": "ggg'gggg'gg",
                   "state": false
                }
             }
