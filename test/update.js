@@ -57,7 +57,7 @@ test('update JSON', async t => {
 })
 
 
-test.skip('update JSON || 合并', async t => {
+test('update JSON || 合并', async t => {
 
    async function main() {
 
@@ -99,7 +99,7 @@ test.skip('update JSON || 合并', async t => {
 })
 
 
-test.skip('update JSON Insert', async t => {
+test('update JSON Insert', async t => {
 
    async function main() {
 
@@ -112,6 +112,93 @@ test.skip('update JSON Insert', async t => {
             [Set.insert]: {
                path: "{0}",
                value: {
+                  "area": "ggg'gggg'gg",
+                  "state": false
+               }
+            }
+         }
+      }
+
+      const result = await tasks.update({
+         where: {
+            id: 4
+         }
+      }, update).catch(error => {
+         let { message } = error
+         return {
+            code: 1000,
+            message
+         }
+      })
+
+      t.ok(result)
+
+      console.log(result)
+
+   }
+
+   await main().catch(error => {
+      console.log(error)
+   })
+
+})
+
+
+
+test('update JSON insertFirst', async t => {
+
+   async function main() {
+
+      const { tasks } = await common().catch(error => {
+         console.log(error)
+      })
+
+      const update = {
+         keywords: {
+            [Set.insertFirst]: {
+               "area": "ggg'gggg'gg",
+               "state": false
+            }
+         }
+      }
+
+      const result = await tasks.update({
+         where: {
+            id: 4
+         }
+      }, update).catch(error => {
+         let { message } = error
+         return {
+            code: 1000,
+            message
+         }
+      })
+
+      t.ok(result)
+
+      console.log(result)
+
+   }
+
+   await main().catch(error => {
+      console.log(error)
+   })
+
+})
+
+
+test('update JSON insertFirst', async t => {
+
+   async function main() {
+
+      const { tasks } = await common().catch(error => {
+         console.log(error)
+      })
+
+      const update = {
+         keywords: {
+            [Set.insertByPath]: {
+               '{0}': {
                   "area": "ggg'gggg'gg",
                   "state": false
                }

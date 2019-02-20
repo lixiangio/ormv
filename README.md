@@ -78,7 +78,19 @@ async function main() {
 
 在主键字段上搜索
 
-### options参数
+#### model.count(options)
+
+查询数据总量
+
+#### model.update(options)
+
+更新数据
+
+#### model.destroy(options)
+
+删除数据
+
+## options参数
 
 #### options.where
 
@@ -110,3 +122,78 @@ where参数值的第一层仅支持逻辑运算符(and、or)，比较运算符�
 #### options.limit
 
 #### options.offset
+
+
+## Get查询操作符
+
+### 示例
+
+```js
+const Ormv = require('ormv');
+const { Get } = Ormv;
+```
+
+#### 可用操作符
+```js
+{
+   eq: Symbol('eq'),
+   ne: Symbol('ne'),
+   gte: Symbol('gte'),
+   gt: Symbol('gt'),
+   lte: Symbol('lte'),
+   lt: Symbol('lt'),
+   not: Symbol('not'),
+   is: Symbol('is'),
+   in: Symbol('in'),
+   notIn: Symbol('notIn'),
+   like: Symbol('like'),
+   notLike: Symbol('notLike'),
+   iLike: Symbol('iLike'),
+   notILike: Symbol('notILike'),
+   regexp: Symbol('regexp'),
+   notRegexp: Symbol('notRegexp'),
+   iRegexp: Symbol('iRegexp'),
+   notIRegexp: Symbol('notIRegexp'),
+   between: Symbol('between'),
+   notBetween: Symbol('notBetween'),
+   overlap: Symbol('overlap'),
+   contains: Symbol('contains'),
+   contained: Symbol('contained'),
+   adjacent: Symbol('adjacent'),
+   strictLeft: Symbol('strictLeft'),
+   strictRight: Symbol('strictRight'),
+   noExtendRight: Symbol('noExtendRight'),
+   noExtendLeft: Symbol('noExtendLeft'),
+   and: Symbol('and'),
+   or: Symbol('or'),
+   any: Symbol('any'),
+   all: Symbol('all'),
+   values: Symbol('values'),
+   col: Symbol('col'),
+   placeholder: Symbol('placeholder'),
+   join: Symbol('join'),
+   raw: Symbol('raw'),
+}
+```
+
+
+## Set赋值操作符
+
+### 示例
+
+```js
+const Ormv = require('ormv');
+const { Set } = Ormv;
+```
+
+#### 可用操作符
+```js
+{
+   merge: Symbol('merge'),
+   set: Symbol('set'),
+   insert: Symbol('insert'),
+   insertByPath: Symbol('insertByPath'),
+   insertFirst: Symbol('insertFirst'),
+}
+```
+

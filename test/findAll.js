@@ -3,7 +3,7 @@
 const test = require('jtf');
 const common = require('./common')
 const Ormv = require('..');
-const { Op } = Ormv
+const { Get } = Ormv
 
 test('findAll', async t => {
 
@@ -92,10 +92,10 @@ test('findAll Group', async t => {
          ],
          where: {
             id: {
-               [Op.in]: [1, 34]
+               [Get.in]: [1, 34]
             },
             email: {
-               [Op.in]: [
+               [Get.in]: [
                   "Kareem.Kerluke@yahoo.com",
                   "Janae.Kiehn95@yahoo.com"
                ]
