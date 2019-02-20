@@ -1,8 +1,9 @@
 'use strict'
 
 const test = require('jtf');
-const Ormv = require('..');
 const common = require('./common');
+const Ormv = require('..');
+const { Get, Set } = Ormv
 
 test('update JSON', async t => {
 
@@ -13,21 +14,20 @@ test('update JSON', async t => {
       })
 
       const data = {
-         email: "adb@qq.com"
+         email: "adb@qq.com",
+         keywords: { area: `7'7`, state: true }
       }
-
-      const { Op } = Ormv
 
       const result = await tasks.update({
          where: {
             id: 6,
             keywords: {
-               [Op.in]: [1, 2]
+               [Get.in]: [1, 2]
             },
-            [Op.or]: [
+            [Get.or]: [
                {
                   email: {
-                     [Op.eq]: "xxx@jj.com"
+                     [Get.eq]: "xxx@jj.com"
                   },
                   device: {},
                },
@@ -57,7 +57,7 @@ test('update JSON', async t => {
 })
 
 
-test('update JSON || 合并', async t => {
+test.skip('update JSON || 合并', async t => {
 
    async function main() {
 
@@ -65,11 +65,9 @@ test('update JSON || 合并', async t => {
          console.log(error)
       })
 
-      const { merge } = Ormv.Op
-
       const data = {
          keywords: {
-            [merge]: {
+            [Set.merge]: {
                "area": "5'68",
                "state": false
             }
@@ -101,7 +99,7 @@ test('update JSON || 合并', async t => {
 })
 
 
-test('update JSON Insert', async t => {
+test.skip('update JSON Insert', async t => {
 
    async function main() {
 
@@ -109,11 +107,9 @@ test('update JSON Insert', async t => {
          console.log(error)
       })
 
-      const { insert } = Ormv.Op
-
       const update = {
          keywords: {
-            [insert]: {
+            [Set.insert]: {
                path: "{0}",
                value: {
                   "area": "ggg'gggg'gg",

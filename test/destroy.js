@@ -11,6 +11,8 @@ test('destroy', async t => {
          console.log(error)
       })
 
+      console.log(tasks.destroy)
+
       const result = await tasks.destroy({
          where: {
             id: 1
@@ -21,11 +23,11 @@ test('destroy', async t => {
 
       t.ok(true)
 
-      console.log(result)
+      // console.log(result)
 
    }
 
-   main().catch(function (error) {
+   await main().catch(function (error) {
       console.log(error)
    })
 

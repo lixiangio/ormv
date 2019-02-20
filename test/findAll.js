@@ -1,8 +1,9 @@
 'use strict'
 
 const test = require('jtf');
-const Ormv = require('..')
 const common = require('./common')
+const Ormv = require('..');
+const { Op } = Ormv
 
 test('findAll', async t => {
 
@@ -90,7 +91,15 @@ test('findAll Group', async t => {
             `COUNT(platform) as xx`
          ],
          where: {
-            id: 1
+            id: {
+               [Op.in]: [1, 34]
+            },
+            email: {
+               [Op.in]: [
+                  "Kareem.Kerluke@yahoo.com",
+                  "Janae.Kiehn95@yahoo.com"
+               ]
+            }
          },
          order: {
             "tasks.id": "DESC",
