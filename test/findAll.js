@@ -1,11 +1,35 @@
 'use strict'
 
 const test = require('jtf');
-const common = require('./common')
+const common = require('./common');
 const Ormv = require('..');
-const { Get } = Ormv
+const { Get } = Ormv;
 
-test('findAll', async t => {
+test('no arguments ', async t => {
+
+   async function main() {
+
+      const { tasks } = await common().catch(error => {
+         console.log(error)
+      })
+
+      const result = await tasks.findAll().catch(error => {
+         console.log(error)
+      })
+
+      t.ok(result)
+
+      console.log(result.rows)
+
+   }
+
+   await main().catch(error => {
+      console.log(error)
+   })
+
+})
+
+test('attributes', async t => {
 
    async function main() {
 
@@ -16,8 +40,10 @@ test('findAll', async t => {
       const result = await tasks.findAll({
          attributes: [
             'id',
-            'keywords',
-            `platform as xx`
+            'keywords'
+         ],
+         attributesSQL: [
+            `"platform" as "xx"`
          ],
          where: {
             id: 1
@@ -85,11 +111,6 @@ test('findAll Group', async t => {
       })
 
       const result = await tasks.findAll({
-         attributes: [
-            'id',
-            'keywords',
-            `COUNT(platform) as xx`
-         ],
          where: {
             id: {
                [Get.in]: [1, 34]

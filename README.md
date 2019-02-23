@@ -60,6 +60,10 @@ async function main() {
 }
 ```
 
+### 定义模型
+
+> 模型的命名会被强制转为带s后缀的单词，防止与pg保留关键词产出冲突。
+
 ### API
 
 #### model.insert(data)
@@ -90,38 +94,43 @@ async function main() {
 
 删除数据
 
-## options参数
+## options 查询选项
 
-#### options.where
+* where `Object` - 查询过滤条件，默认为and查询
 
 where参数值的第一层仅支持逻辑运算符(and、or)，比较运算符位于字段对象内。
 
 ```js
+const { Get } = Ormv;
 {
    where: {
       id: 6,
       keywords: {
-         [Op.in]: { "u": 99 }
+         [Get.in]: { "u": 99 }
       },
-      [Op.or]: [
+      [Get.or]: [
          {
             a: 1
-         },
-         {
-            b: 2
          }
       ],
    }
 }
 ```
 
-#### options.transaction 
+* attributes `Array` - 定义字段
 
-#### options.order
+* attributesSQL `Strintg` - 使用原生SQL表达式定义字段
 
-#### options.limit
+* order `Object` - 排序
 
-#### options.offset
+* offset `Number` - 限定查询结果的起始位置
+
+* limit `Number` - 限制返回结果数量
+
+
+#### 事务
+
+<!-- * transaction `*` - 事务操作，待开发 -->
 
 
 ## Get查询操作符
@@ -196,4 +205,3 @@ const { Set } = Ormv;
    insertFirst: Symbol('insertFirst'),
 }
 ```
-

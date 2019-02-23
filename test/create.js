@@ -10,8 +10,8 @@ async function main() {
 
    const data = {
       keywords: {
-         random: Math.random(),
-         abs: `k'k'kk"k<script type="text/javascript" src="/app.js"></script>`
+         state: false,
+         area: `k'k'kk"k<script type="text/javascript" src="/app.js"></script>`
       }
    }
 
