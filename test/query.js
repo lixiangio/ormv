@@ -30,7 +30,7 @@ async function main() {
 
    console.log(result1);
 
-   // const result2 = await client.query('SELECT * FROM "tasks" WHERE id = 4 LIMIT 1').catch(error => {
+   // const result2 = await client.query(`SELECT * FROM "tasks" WHERE id = 4 LIMIT 1`).catch(error => {
    //    let { message } = error
    //    return {
    //       code: 1000,
@@ -38,7 +38,7 @@ async function main() {
    //    }
    // })
 
-   // console.log(result2.rows);
+   // console.log(result2);
 
 }
 

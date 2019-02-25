@@ -3,7 +3,11 @@
 const test = require('jtf');
 const common = require('./common');
 const Ormv = require('..');
-const { Get, Set } = Ormv
+
+const { $and, $sql, $in, } = Ormv.Op;
+
+const { $merge, $insertByPath, $insertFirst, $insert } = Ormv.Op;
+
 
 test('update JSON', async t => {
 
@@ -13,44 +17,40 @@ test('update JSON', async t => {
          console.log(error)
       })
 
-      const data = {
+      const update = {
          email: "adb@qq.com",
-         keywords: { area: `7'7`, state: true }
+         keywords: {
+            area: `7'7`,
+            state: true
+         }
       }
 
       const result = await tasks.update({
-         where: {
+         where: $and({
             id: 6,
-            keywords: {
-               [Get.in]: [1, 2]
-            },
-            [Get.or]: [
-               {
-                  email: {
-                     [Get.eq]: "xxx@jj.com"
-                  },
-                  device: {},
-               },
-               {
-                  platform: {},
-               }
-            ],
-         }
-      }, data).catch(function (error) {
+            keywords: $in(1, 2)
+         }).$or({
+            email: "xxx@jj.com",
+            device: {},
+         }).$or({
+            platform: {},
+         })
+      }, update).catch(function (error) {
          let { message } = error
+         console.log(error)
          return {
             code: 1000,
             message
          }
       })
 
-      t.ok(result)
+      t.ok(result);
 
-      console.log(result)
+      console.log(result);
 
    }
 
-   await main().catch(function (error) {
+   await main().catch(error => {
       console.log(error)
    })
 
@@ -65,20 +65,18 @@ test('update JSON || 合并', async t => {
          console.log(error)
       })
 
-      const data = {
-         keywords: {
-            [Set.merge]: {
-               "area": "5'68",
-               "state": false
-            }
-         }
+      const update = {
+         "keywords": $merge({
+            "area": "5'68",
+            "state": false
+         })
       }
 
       const result = await tasks.update({
-         where: {
+         where: $and({
             id: 2
-         }
-      }, data).catch(function (error) {
+         })
+      }, update).catch(error => {
          let { message } = error
          return {
             code: 1000,
@@ -92,8 +90,8 @@ test('update JSON || 合并', async t => {
 
    }
 
-   await main().catch(function (error) {
-      console.log(error)
+   await main().catch(error => {
+      console.log(error);
    })
 
 })
@@ -108,64 +106,16 @@ test('update JSON Insert', async t => {
       })
 
       const update = {
-         keywords: {
-            [Set.insert]: {
-               path: "{0}",
-               value: {
-                  "area": "ggg'gggg'gg",
-                  "state": false
-               }
-            }
-         }
+         keywords: $insert('keywords', "{0}", {
+            "area": "ggg'gggg'gg",
+            "state": false
+         })
       }
 
       const result = await tasks.update({
-         where: {
+         where: $and({
             id: 4
-         }
-      }, update).catch(error => {
-         let { message } = error
-         return {
-            code: 1000,
-            message
-         }
-      })
-
-      t.ok(result)
-
-      console.log(result)
-
-   }
-
-   await main().catch(error => {
-      console.log(error)
-   })
-
-})
-
-
-
-test('update JSON insertFirst', async t => {
-
-   async function main() {
-
-      const { tasks } = await common().catch(error => {
-         console.log(error)
-      })
-
-      const update = {
-         keywords: {
-            [Set.insertFirst]: {
-               "area": "ggg'gggg'gg",
-               "state": false
-            }
-         }
-      }
-
-      const result = await tasks.update({
-         where: {
-            id: 4
-         }
+         })
       }, update).catch(error => {
          let { message } = error
          return {
@@ -196,22 +146,59 @@ test('update JSON insertFirst', async t => {
       })
 
       const update = {
-         keywords: {
-            [Set.insertByPath]: {
-               '{0}': {
-                  "area": "ggg'gggg'gg",
-                  "state": false
-               }
-            }
-         }
+         keywords: $insertFirst({
+            "area": "ggg'gggg'gg",
+            "state": false
+         })
       }
 
       const result = await tasks.update({
-         where: {
+         where: $and({
             id: 4
-         }
+         })
       }, update).catch(error => {
          let { message } = error
+         return {
+            code: 1000,
+            message
+         }
+      })
+
+      t.ok(result)
+
+      console.log(result)
+
+   }
+
+   await main().catch(error => {
+      console.log(error)
+   })
+
+})
+
+
+test('update JSON insertByPath', async t => {
+
+   async function main() {
+
+      const { tasks } = await common().catch(error => {
+         console.log(error)
+      })
+
+      const update = {
+         keywords: $insertByPath('{1}', {
+            "area": "ggg'gggg'gg",
+            "state": false
+         })
+      }
+
+      const result = await tasks.update({
+         where: $and({
+            id: 4
+         })
+      }, update).catch(error => {
+         let { message } = error
+         console.log(error)
          return {
             code: 1000,
             message

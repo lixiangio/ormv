@@ -1,6 +1,16 @@
 ## ormv
 
-基于pg模块封装的orm模型
+Postgresql ORM模型
+
+### 特点
+
+* 支持对JSON类型字段建模，提供强大的嵌套数据校验功能
+
+* 基于函数风格的查询表达式，具有简约、直观、易于调试等特性
+
+* 支持扩展自定义的运算符函数，对于定制化需求非常有用
+
+* 在实现结构化查询的同时，依然能找到类似SQL语法的感觉
 
 ### Install
 
@@ -50,8 +60,31 @@ async function main() {
       },
    })
 
+   const { $and, $sql, $in } = Ormv.Op;
+
    // 基于数据模型的结构化查询
-   await tasks.findAll()
+   await tasks.find({
+      select: [
+         'id',
+         'keywords',
+         $sql(`"email" as "Email"`)
+      ],
+      where: $and({
+         id: $in(1, 34),
+         email: $in(
+            "Kareem.Kerluke@yahoo.com",
+            "Janae.Kiehn95@yahoo.com"
+         )
+      }).$or({
+         id: 6,
+         keywords: {},
+      }),
+      order: {
+         "tasks.id": "DESC",
+         "tasks.keywords": "DESC"
+      },
+      limit: 10
+   })
 
    await tasks.findOne()
 
@@ -96,30 +129,9 @@ async function main() {
 
 ## options 查询选项
 
+* select `Array` - 选择字段
+
 * where `Object` - 查询过滤条件，默认为and查询
-
-where参数值的第一层仅支持逻辑运算符(and、or)，比较运算符位于字段对象内。
-
-```js
-const { Get } = Ormv;
-{
-   where: {
-      id: 6,
-      keywords: {
-         [Get.in]: { "u": 99 }
-      },
-      [Get.or]: [
-         {
-            a: 1
-         }
-      ],
-   }
-}
-```
-
-* attributes `Array` - 定义字段
-
-* attributesSQL `Strintg` - 使用原生SQL表达式定义字段
 
 * order `Object` - 排序
 
@@ -127,81 +139,132 @@ const { Get } = Ormv;
 
 * limit `Number` - 限制返回结果数量
 
+<!-- * transaction `*` - 事务选项，待开发 -->
 
-#### 事务
+## 查询操作符函数
 
-<!-- * transaction `*` - 事务操作，待开发 -->
-
-
-## Get查询操作符
+仅用于options.where属性中，作为数据筛选条件，包含逻辑运算符、比较运算符等。
 
 ### 示例
 
 ```js
 const Ormv = require('ormv');
-const { Get } = Ormv;
+const { $and, $or, $in, $lt, $... } = Ormv.Op;
 ```
 
-#### 可用操作符
-```js
-{
-   eq: Symbol('eq'),
-   ne: Symbol('ne'),
-   gte: Symbol('gte'),
-   gt: Symbol('gt'),
-   lte: Symbol('lte'),
-   lt: Symbol('lt'),
-   not: Symbol('not'),
-   is: Symbol('is'),
-   in: Symbol('in'),
-   notIn: Symbol('notIn'),
-   like: Symbol('like'),
-   notLike: Symbol('notLike'),
-   iLike: Symbol('iLike'),
-   notILike: Symbol('notILike'),
-   regexp: Symbol('regexp'),
-   notRegexp: Symbol('notRegexp'),
-   iRegexp: Symbol('iRegexp'),
-   notIRegexp: Symbol('notIRegexp'),
-   between: Symbol('between'),
-   notBetween: Symbol('notBetween'),
-   overlap: Symbol('overlap'),
-   contains: Symbol('contains'),
-   contained: Symbol('contained'),
-   adjacent: Symbol('adjacent'),
-   strictLeft: Symbol('strictLeft'),
-   strictRight: Symbol('strictRight'),
-   noExtendRight: Symbol('noExtendRight'),
-   noExtendLeft: Symbol('noExtendLeft'),
-   and: Symbol('and'),
-   or: Symbol('or'),
-   any: Symbol('any'),
-   all: Symbol('all'),
-   values: Symbol('values'),
-   col: Symbol('col'),
-   placeholder: Symbol('placeholder'),
-   join: Symbol('join'),
-   raw: Symbol('raw'),
-}
-```
+### 逻辑运算符
+
+#### Op.$and()
+
+逻辑与，支持链式操作
+
+#### Op.$or()
+
+逻辑或，支持链式操作
+
+### 比较运算符
+
+#### Op.$eq()
+
+#### Op.$ne()
+
+#### Op.$gte()
+
+#### Op.$gt()
+
+#### Op.$lte()
+
+#### Op.$lt()
 
 
-## Set赋值操作符
+### 其它操作符
+
+#### Op.$sql()
+
+添加原生sql子句，内置单引号转义。
+
+#### Op.$not()
+
+#### Op.$is()
+
+#### Op.$in()
+
+#### Op.$notIn()
+
+#### Op.$like()
+
+#### Op.$notIn()
+
+#### Op.$notLike()
+
+#### Op.$iLike()
+
+#### Op.$notILike()
+
+#### Op.$regexp()
+
+#### Op.$regexp()
+
+#### Op.$regexp()
+
+#### Op.$regexp()
+
+#### Op.$notRegexp()
+
+#### Op.$iRegexp()
+
+#### Op.$notIRegexp()
+
+#### Op.$between()
+
+#### Op.$notBetween()
+
+#### Op.$overlap()
+
+#### Op.$contains()
+
+#### Op.$contained()
+
+#### Op.$adjacent()
+
+#### Op.$strictLeft()
+
+#### Op.$strictRight()
+
+#### Op.$noExtendRight()
+
+#### Op.$noExtendLeft()
+
+#### Op.$any()
+
+#### Op.$all()
+
+#### Op.$values()
+
+#### Op.$col()
+
+#### Op.$placeholder()
+
+#### Op.$join()
+
+#### Op.$raw()
+
+
+## update操作符函数
 
 ### 示例
 
 ```js
 const Ormv = require('ormv');
-const { Set } = Ormv;
+const { $merge, $insert, $... } = Ormv.Op;
 ```
 
-#### 可用操作符
-```js
-{
-   merge: Symbol('merge'),
-   set: Symbol('set'),
-   insert: Symbol('insert'),
-   insertByPath: Symbol('insertByPath'),
-   insertFirst: Symbol('insertFirst'),
-}
-```
+#### Op.$merge()
+
+#### Op.$set()
+
+#### Op.$insert()
+
+#### Op.$insertByPath()
+
+#### Op.$insertFirst()

@@ -9,9 +9,13 @@ async function main() {
    })
 
    const result = await tasks.findByPk(6, {
-      // attributes: ['id', 'keywords']
-   }).catch(err => {
-      return { error: err.message }
+      attributes: ['id', 'keywords']
+   }).catch(error => {
+      const { message } = error
+      return {
+         code: 1000,
+         message
+      }
    })
 
    console.log(result)

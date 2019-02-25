@@ -2,8 +2,9 @@
 
 const test = require('jtf');
 const common = require('./common');
-const Ormv = require('..');
-const { Get } = Ormv;
+const Ormv = require('../lib');
+
+const { $sql, $and, $in } = Ormv.Op;
 
 test('no arguments ', async t => {
 
@@ -19,7 +20,7 @@ test('no arguments ', async t => {
 
       t.ok(result)
 
-      console.log(result.rows)
+      console.log(result.length)
 
    }
 
@@ -29,7 +30,7 @@ test('no arguments ', async t => {
 
 })
 
-test('attributes', async t => {
+test('select', async t => {
 
    async function main() {
 
@@ -37,17 +38,9 @@ test('attributes', async t => {
          console.log(error)
       })
 
-      const result = await tasks.findAll({
-         attributes: [
-            'id',
-            'keywords'
-         ],
-         attributesSQL: [
-            `"platform" as "xx"`
-         ],
-         where: {
-            id: 1
-         },
+      const result = await tasks.find({
+         select: ['id', 'keywords', $sql(`"platform" as "xx"`)],
+         where: $and({ "tasks.id": 1 }),
          order: {
             "tasks.id": "DESC",
             "tasks.keywords": "DESC"
@@ -57,9 +50,23 @@ test('attributes', async t => {
          console.log(error)
       })
 
+      // 仿sql链式风格
+      // const result = await tasks.select('id', 'keywords', $sql(`"platform" as "xx"`))
+      //    .where({ id: 1 })
+      //    .or({ id: 1 })
+      //    .order({
+      //       "tasks.id": "DESC",
+      //       "tasks.keywords": "DESC"
+      //    })
+      //    .limit(10)
+      //    .query()
+      //    .catch(error => {
+      //       console.log(error)
+      //    })
+
       t.ok(result)
 
-      console.log(result.rows)
+      console.log(result.length)
 
    }
 
@@ -69,7 +76,7 @@ test('attributes', async t => {
 
 })
 
-test('no attributes', async t => {
+test('no select', async t => {
 
    async function main() {
 
@@ -78,14 +85,14 @@ test('no attributes', async t => {
       })
 
       const result = await tasks.findAll({
-         where: {
-            id: 1
-         },
+         where: $and({
+            "tasks.id": 1,
+            "tasks.email": "Kareem.Kerluke@yahoo.com"
+         }),
          order: {
             "tasks.id": "DESC",
             "tasks.keywords": "DESC"
          },
-         // group: ['platform']
       }).catch(error => {
          console.log(error)
       })
@@ -102,7 +109,7 @@ test('no attributes', async t => {
 
 })
 
-test('findAll Group', async t => {
+test('findAll group', async t => {
 
    async function main() {
 
@@ -111,19 +118,16 @@ test('findAll Group', async t => {
       })
 
       const result = await tasks.findAll({
-         where: {
-            id: {
-               [Get.in]: [1, 34]
-            },
-            email: {
-               [Get.in]: [
-                  "Kareem.Kerluke@yahoo.com",
-                  "Janae.Kiehn95@yahoo.com"
-               ]
-            }
-         },
+         select: [$sql(`count(*)`)],
+         where: $and({
+            id: $in(1, 34),
+            email: $in(
+               "Kareem.Kerluke@yahoo.com",
+               "Janae.Kiehn95@yahoo.com"
+            )
+         }),
          order: {
-            "tasks.id": "DESC",
+            'tasks."id"': "DESC",
             "tasks.keywords": "DESC"
          },
          group: ['platform', 'id']

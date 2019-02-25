@@ -17,7 +17,7 @@ async function main() {
 
    await client.connect()
 
-   const { CHAR, STRING, INTEGER, JSONB, BOOLEAN } = Ormv.Type
+   const { STRING, INTEGER, JSONB, BOOLEAN } = Ormv.Type
 
    const tasks = client.define('tasks', {
       'id': {
@@ -39,8 +39,7 @@ async function main() {
       'email': {
          type: STRING,
          validate: {
-            isEmail: true,
-            // isInt: true
+            isEmail: true
          }
       },
       // "area": {
