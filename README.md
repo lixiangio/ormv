@@ -1,4 +1,4 @@
-## ormv
+# ormv
 
 Postgresql ORM模型
 
@@ -18,7 +18,7 @@ Postgresql ORM模型
 npm install ormv
 ```
 
-#### 示例
+### 示例
 
 ```js
 async function main() {
@@ -95,23 +95,25 @@ async function main() {
 
 ### 定义模型
 
-> 模型的命名会被强制转为带s后缀的单词，防止与pg保留关键词产出冲突。
+```js
+   const model = client.define(name, options)
+```
 
 ### API
 
 #### model.insert(data)
 
-插入
+插入新数据
 
 #### model.findAll(options)
 
-查询多条
+查询多条记录
 
 #### model.findOne(options)
 
-查询单条
+查询单条记录
 
-#### model.findByPk(id, options)
+#### model.findByPk(value, options)
 
 在主键字段上搜索
 
