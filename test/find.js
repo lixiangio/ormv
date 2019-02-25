@@ -38,8 +38,11 @@ test('select', async t => {
          console.log(error)
       })
 
+      console.log(tasks.name)
+
       const result = await tasks.find({
          select: ['id', 'keywords', $sql(`"platform" as "xx"`)],
+         join: tasks,
          where: $and({ "tasks.id": 1 }),
          order: {
             "tasks.id": "DESC",
@@ -51,18 +54,29 @@ test('select', async t => {
       })
 
       // 仿sql链式风格
-      // const result = await tasks.select('id', 'keywords', $sql(`"platform" as "xx"`))
-      //    .where({ id: 1 })
-      //    .or({ id: 1 })
-      //    .order({
-      //       "tasks.id": "DESC",
-      //       "tasks.keywords": "DESC"
-      //    })
-      //    .limit(10)
-      //    .query()
-      //    .catch(error => {
-      //       console.log(error)
-      //    })
+      const result = await tasks.select('id', 'keywords', $sql(`"platform" as "xx"`))
+         .where({ id: 1 })
+         .or({ id: 1 })
+         .order({
+            "tasks.id": "DESC",
+            "tasks.keywords": "DESC"
+         })
+         .one()
+         .catch(error => {
+            console.log(error)
+         })
+
+      const result = await tasks.select('id', 'keywords', $sql(`"platform" as "xx"`))
+         .where({ id: 1 })
+         .or({ id: 1 })
+         .order({
+            "tasks.id": "DESC",
+            "tasks.keywords": "DESC"
+         })
+         .primaryKey()
+         .catch(error => {
+            console.log(error)
+         })
 
       t.ok(result)
 
