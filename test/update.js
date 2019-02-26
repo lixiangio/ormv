@@ -185,25 +185,23 @@ test('update JSON insertByPath', async t => {
          console.log(error)
       })
 
-      const update = {
+      const data = {
          keywords: $insertByPath('{1}', {
             "area": "ggg'gggg'gg",
             "state": false
          })
       }
 
-      const result = await tasks.update({
-         where: $and({
-            id: 4
+      const result = await tasks.update(data)
+         .where({ id: 4 })
+         .or({ id: 4 })
+         .catch(error => {
+            let { message } = error
+            return {
+               code: 1000,
+               message
+            }
          })
-      }, update).catch(error => {
-         let { message } = error
-         console.log(error)
-         return {
-            code: 1000,
-            message
-         }
-      })
 
       t.ok(result)
 

@@ -15,7 +15,7 @@ async function main() {
       }
    }
 
-   const result = await tasks.create(data).catch(error => {
+   const result = await tasks.insert(data).catch(error => {
       let { message } = error
       return {
          code: 1000,

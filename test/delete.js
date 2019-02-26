@@ -11,13 +11,14 @@ test('destroy', async t => {
          console.log(error)
       })
 
-      const result = await tasks.destroy({
-         where: {
+      const result = await tasks.delete()
+         .where({
             id: 1
-         }
-      }).catch(error => {
-         console.log(error)
-      })
+         })
+         .send()
+         .catch(error => {
+            console.log(error)
+         })
 
       t.ok(true)
 
