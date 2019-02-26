@@ -9,17 +9,15 @@ async function main() {
    })
 
    const result = await tasks
-      .where({
-         id: 50,
-         keywords: {}
-      })
-      .order({
-         "tasks.id": "DESC",
-         "tasks.keywords": "DESC"
-      })
-      .findOne()
+      .select('id', 'keywords')
+      .findPk(6)
       .catch(error => {
          console.log(error)
+         const { message } = error
+         return {
+            code: 1000,
+            message
+         }
       })
 
    console.log(result)

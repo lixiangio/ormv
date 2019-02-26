@@ -11,18 +11,17 @@ test('destroy', async t => {
          console.log(error)
       })
 
-      const result = await tasks.delete()
-         .where({
-            id: 1
-         })
-         .send()
+      const result = await tasks
+         .where({ id: 1 })
+         .or({ id: 3 })
+         .delete()
          .catch(error => {
             console.log(error)
          })
 
       t.ok(true)
 
-      // console.log(result)
+      console.log(result)
 
    }
 

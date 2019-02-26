@@ -25,24 +25,27 @@ test('update JSON', async t => {
          }
       }
 
-      const result = await tasks.update({
-         where: $and({
+      const result = await tasks
+         .where({
             id: 6,
             keywords: $in(1, 2)
-         }).$or({
+         })
+         .or({
             email: "xxx@jj.com",
             device: {},
-         }).$or({
+         })
+         .or({
             platform: {},
          })
-      }, update).catch(function (error) {
-         let { message } = error
-         console.log(error)
-         return {
-            code: 1000,
-            message
-         }
-      })
+         .update(update)
+         .catch(function (error) {
+            let { message } = error
+            console.log(error)
+            return {
+               code: 1000,
+               message
+            }
+         })
 
       t.ok(result);
 
@@ -72,17 +75,18 @@ test('update JSON || 合并', async t => {
          })
       }
 
-      const result = await tasks.update({
-         where: $and({
+      const result = await tasks
+         .where({
             id: 2
          })
-      }, update).catch(error => {
-         let { message } = error
-         return {
-            code: 1000,
-            message
-         }
-      })
+         .update(update)
+         .catch(error => {
+            let { message } = error
+            return {
+               code: 1000,
+               message
+            }
+         })
 
       t.ok(result)
 
@@ -112,17 +116,18 @@ test('update JSON Insert', async t => {
          })
       }
 
-      const result = await tasks.update({
-         where: $and({
+      const result = await tasks
+         .where({
             id: 4
          })
-      }, update).catch(error => {
-         let { message } = error
-         return {
-            code: 1000,
-            message
-         }
-      })
+         .update(update)
+         .catch(error => {
+            let { message } = error
+            return {
+               code: 1000,
+               message
+            }
+         })
 
       t.ok(result)
 
@@ -152,17 +157,16 @@ test('update JSON insertFirst', async t => {
          })
       }
 
-      const result = await tasks.update({
-         where: $and({
-            id: 4
+      const result = await tasks
+         .where({ id: 4 })
+         .update(update)
+         .catch(error => {
+            let { message } = error
+            return {
+               code: 1000,
+               message
+            }
          })
-      }, update).catch(error => {
-         let { message } = error
-         return {
-            code: 1000,
-            message
-         }
-      })
 
       t.ok(result)
 
@@ -192,9 +196,10 @@ test('update JSON insertByPath', async t => {
          })
       }
 
-      const result = await tasks.update(data)
+      const result = await tasks
          .where({ id: 4 })
          .or({ id: 4 })
+         .update(data)
          .catch(error => {
             let { message } = error
             return {
