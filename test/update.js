@@ -1,7 +1,7 @@
 'use strict'
 
 const test = require('jtf');
-const common = require('./common');
+const db = require('./db');
 const Ormv = require('..');
 
 const { $and, $sql, $in, } = Ormv.Op;
@@ -13,7 +13,7 @@ test('update JSON', async t => {
 
    async function main() {
 
-      const { tasks } = await common().catch(error => {
+      const { tasks } = await db().catch(error => {
          console.log(error)
       })
 
@@ -64,7 +64,7 @@ test('update JSON || 合并', async t => {
 
    async function main() {
 
-      const { tasks } = await common().catch(error => {
+      const { tasks } = await db().catch(error => {
          console.log(error)
       })
 
@@ -105,7 +105,7 @@ test('update JSON Insert', async t => {
 
    async function main() {
 
-      const { tasks } = await common().catch(error => {
+      const { tasks } = await db().catch(error => {
          console.log(error)
       })
 
@@ -146,7 +146,7 @@ test('update JSON insertFirst', async t => {
 
    async function main() {
 
-      const { tasks } = await common().catch(error => {
+      const { tasks } = await db().catch(error => {
          console.log(error)
       })
 
@@ -185,7 +185,7 @@ test('update JSON insertByPath', async t => {
 
    async function main() {
 
-      const { tasks } = await common().catch(error => {
+      const { tasks } = await db().catch(error => {
          console.log(error)
       })
 

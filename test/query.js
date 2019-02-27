@@ -1,10 +1,10 @@
 'use strict'
 
-const common = require('./common')
+const db = require('./db')
 
 async function main() {
 
-   const { client } = await common().catch(error => {
+   const { client } = await db().catch(error => {
       console.log(error)
    })
 
@@ -22,13 +22,14 @@ async function main() {
 
    const result1 = await client.query(sql, value).catch(error => {
       let { message } = error
+      console.log(error)
       return {
          code: 1000,
          message
       }
    })
 
-   // console.log(result1);
+   console.log(result1);
 
    // const result2 = await client.query(`SELECT * FROM "tasks" WHERE id = 4 LIMIT 1`).catch(error => {
    //    let { message } = error

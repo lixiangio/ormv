@@ -1,13 +1,13 @@
 'use strict'
 
 const test = require('jtf');
-const common = require('./common');
+const db = require('./db');
 
 test('destroy', async t => {
 
    async function main() {
 
-      const { tasks } = await common().catch(error => {
+      const { tasks } = await db().catch(error => {
          console.log(error)
       })
 

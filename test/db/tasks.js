@@ -1,23 +1,9 @@
-'use strict'
 
-const Ormv = require('..');
+const Ormv = require('../../');
 
-async function main() {
+const { STRING, INTEGER, JSONB, BOOLEAN } = Ormv.Type
 
-   const client = new Ormv({
-      db: {
-         host: 'localhost',
-         database: 'test',
-         username: 'xiangla',
-         password: '*ns99*621',
-         port: 5432,
-      },
-      logger: true
-   })
-
-   await client.connect()
-
-   const { STRING, INTEGER, JSONB, BOOLEAN } = Ormv.Type
+module.exports = function (client) {
 
    const tasks = client.define('tasks', {
       'id': {
@@ -51,11 +37,6 @@ async function main() {
       // }
    })
 
-   return {
-      client,
-      tasks
-   }
+   return tasks;
 
 }
-
-module.exports = main

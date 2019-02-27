@@ -1,7 +1,7 @@
 'use strict'
 
 const test = require('jtf');
-const common = require('./common');
+const db = require('./db');
 const Ormv = require('../lib');
 
 const { $sql, $and, $or, $in, $as } = Ormv.Op;
@@ -10,7 +10,7 @@ test('no arguments ', async t => {
 
    async function main() {
 
-      const { tasks } = await common().catch(error => {
+      const { tasks } = await db().catch(error => {
          console.log(error)
       })
 
@@ -34,7 +34,7 @@ test('select', async t => {
 
    async function main() {
 
-      const { tasks } = await common().catch(error => {
+      const { tasks } = await db().catch(error => {
          console.log(error)
       })
 
@@ -78,7 +78,7 @@ test('no select', async t => {
 
    async function main() {
 
-      const { tasks } = await common().catch(error => {
+      const { tasks } = await db().catch(error => {
          console.log(error)
       })
 
@@ -112,7 +112,7 @@ test('find group', async t => {
 
    async function main() {
 
-      const { tasks } = await common().catch(error => {
+      const { tasks } = await db().catch(error => {
          console.log(error)
       })
 

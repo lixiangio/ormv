@@ -1,10 +1,10 @@
 'use strict'
 
-const common = require('./common')
+const db = require('./db')
 
 async function main() {
 
-   const { tasks } = await common().catch(error => {
+   const { tasks } = await db().catch(error => {
       console.log(error)
    })
 
