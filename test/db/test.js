@@ -14,7 +14,8 @@ module.exports = function (client) {
          type: CHAR
       },
       'address': {
-         type: JSONB
+         type: JSONB,
+         defaultValue: []
       },
       'email': {
          type: CHAR
