@@ -4,13 +4,14 @@ Postgresql ORM模型
 
 ### 特点
 
-* 使用函数风格的查询表达式，具有简约、直观、易于调试等特性
+* 使用函数链风格的查询表达式，具有简约、直观、易于调试等特性
+
+* 在实现结构化查询的同时，依然保留了类似SQL的语法
 
 * 支持对JSON类型字段建模，提供强大的嵌套数据校验功能
 
 * 支持扩展自定义的运算符函数，对于定制化需求非常有用
 
-* 在实现结构化查询的同时，依然能找到类似SQL语法的感觉
 
 ### Install
 
@@ -60,35 +61,33 @@ async function main() {
       },
    })
 
-   const { $and, $sql, $in } = Ormv.Op;
+   // 操作符
+   const { $and, $in, $as } = Ormv.Op;
 
    // 基于数据模型的结构化查询
-   await tasks.find({
-      select: [
-         'id',
-         'keywords',
-         $sql(`"email" as "Email"`)
-      ],
-      where: $and({
-         id: $in(1, 34),
-         email: $in(
-            "Kareem.Kerluke@yahoo.com",
-            "Janae.Kiehn95@yahoo.com"
-         )
-      }).$or({
-         id: 6,
-         keywords: {},
-      }),
-      order: {
+   const result = await tasks
+      .select('id', 'keywords', $as("platform", "xx"))
+      .leftJoin(users)
+      .on({ 'tasks.id': 'users.uid' })
+      .where({
+         id: $in(50, 51),
+         keywords: {}
+      })
+      .or({ id: 5 })
+      .and({
+         id: 5,
+         keywords: {}
+      })
+      .or({ id: 5 })
+      .order({
          "tasks.id": "DESC",
          "tasks.keywords": "DESC"
-      },
-      limit: 10
-   })
-
-   await tasks.findOne()
-
-   await tasks.findByPk()
+      })
+      .limit(10)
+      .find()
+      .catch(error => {
+         console.log(error)
+      })
 
 }
 ```
@@ -99,60 +98,78 @@ async function main() {
    const model = client.define(name, options)
 ```
 
-### API
+* name `String` - 模型名称
+
+* options `Object` - 模型字段配置项
+
+## 函数链
+
+函数链是一种结构化的Sql生成器，用于防止SQL注入。函数按功能可分为配置类、查询类两种。
+
+配置类函数用于添加并生成Sql子句，位于函数链的中间部分。
+
+查询类函数是执行查询操作的函数，始终位于函数链的末端，并返回Promise。
+
+### 查询函数
 
 #### model.insert(data)
 
 插入新数据
 
-#### model.findAll(options)
+#### model.find()
 
 查询多条记录
 
-#### model.findOne(options)
+#### model.findOne()
 
 查询单条记录
 
-#### model.findByPk(value, options)
+#### model.findPK(id)
 
-在主键字段上搜索
+查询主键id
 
-#### model.count(options)
+#### model.count()
 
 查询数据总量
 
-#### model.update(options)
+#### model.update(data)
 
 更新数据
 
-#### model.destroy(options)
+#### model.destroy()
 
 删除数据
 
-## options 查询选项
+### 配置函数
 
-* select `Array` - 选择字段
+#### model.select(field, ...)
 
-* where `Object` - 查询过滤条件，默认为and查询
+* field `String` - 字段名
 
-* order `Object` - 排序
+#### model.where(options).or(options).and(options)
 
-* offset `Number` - 限定查询结果的起始位置
+* options `Object` - 查询过滤条件，默认为and查询
 
-* limit `Number` - 限制返回结果数量
+#### model.order(options) 
+
+* options `Object` - 排序字段
+
+#### model.offset(value)
+
+* value `Number` - 限定查询结果的起始位置
+
+#### model.limit(value)
+
+* value `Number` - 限制返回结果数量
 
 <!-- * transaction `*` - 事务选项，待开发 -->
 
-## 查询操作符函数
 
-仅用于options.where属性中，作为数据筛选条件，包含逻辑运算符、比较运算符等。
+## 操作符函数
 
-### 示例
+### 查询函数
 
-```js
-const Ormv = require('ormv');
-const { $and, $or, $in, $lt, $... } = Ormv.Op;
-```
+> 用于options.where属性中，作为数据筛选条件，包含逻辑运算符、比较运算符等。
 
 ### 逻辑运算符
 
@@ -252,14 +269,9 @@ const { $and, $or, $in, $lt, $... } = Ormv.Op;
 #### Op.$raw()
 
 
-## update操作符函数
+### Update函数
 
-### 示例
-
-```js
-const Ormv = require('ormv');
-const { $merge, $insert, $... } = Ormv.Op;
-```
+> 用于json类型数据的插入、合并、删除操作
 
 #### Op.$merge()
 

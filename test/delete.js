@@ -21,7 +21,7 @@ test('destroy', async t => {
 
       t.ok(true)
 
-      console.log(result)
+      console.log(result);
 
    }
 

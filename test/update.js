@@ -49,7 +49,7 @@ test('update JSON', async t => {
 
       t.ok(result);
 
-      console.log(result);
+      console.log(result.rowCount);
 
    }
 
@@ -90,7 +90,7 @@ test('update JSON || 合并', async t => {
 
       t.ok(result)
 
-      console.log(result)
+      console.log(result.rowCount);
 
    }
 
@@ -131,7 +131,7 @@ test('update JSON Insert', async t => {
 
       t.ok(result)
 
-      console.log(result)
+      console.log(result.rowCount);
 
    }
 
@@ -170,7 +170,7 @@ test('update JSON insertFirst', async t => {
 
       t.ok(result)
 
-      console.log(result)
+      console.log(result.rowCount);
 
    }
 

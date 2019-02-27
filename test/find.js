@@ -4,7 +4,7 @@ const test = require('jtf');
 const common = require('./common');
 const Ormv = require('../lib');
 
-const { $sql, $and, $in, $as } = Ormv.Op;
+const { $sql, $and, $or, $in, $as } = Ormv.Op;
 
 test('no arguments ', async t => {
 
@@ -40,6 +40,8 @@ test('select', async t => {
 
       const result = await tasks
          .select('id', 'keywords', $as("platform", "xx"))
+         .leftJoin({ name: "users" })
+         .on({ 'tasks.id': 'users.uid' })
          .where({
             id: $in(50, 51),
             keywords: {}
@@ -54,6 +56,7 @@ test('select', async t => {
             "tasks.id": "DESC",
             "tasks.keywords": "DESC"
          })
+         .limit(10)
          .find()
          .catch(error => {
             console.log(error)
@@ -131,7 +134,7 @@ test('find group', async t => {
 
       t.ok(result)
 
-      console.log(result);
+      console.log(result)
 
    }
 
