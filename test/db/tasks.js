@@ -28,14 +28,17 @@ module.exports = function (client) {
             isEmail: true
          }
       },
-      // "area": {
-      //    type: STRING
-      // },
-      // 'state': {
-      //    type: BOOLEAN,
-      //    defaultValue: true
-      // }
+      "area": {
+         type: STRING,
+         allowNull: true
+      },
+      'state': {
+         type: BOOLEAN,
+         defaultValue: true
+      }
    })
+
+   // tasks.sync('increment');
 
    return tasks;
 

@@ -39,19 +39,19 @@ test('select', async t => {
       })
 
       const result = await tasks
-         .select('id', 'keywords', $as("platform", "xx"))
-         .leftJoin({ name: "users" })
-         .on({ 'tasks.id': 'users.uid' })
+         .select('tasks.id', 'keywords', $as("tasks.email", "xx"))
+         .leftJoin({ name: "user" })
+         .on({ 'tasks.id': 'user.id' })
          .where({
-            id: $in(50, 51),
+            'tasks.id': $in(50, 51),
             keywords: {}
          })
-         .or({ id: 5 })
+         .or({ 'tasks.id': 5 })
          .and({
-            id: 5,
+            'tasks.id': 5,
             keywords: {}
          })
-         .or({ id: 5 })
+         .or({ 'tasks.id': 5 })
          .order({
             "tasks.id": "DESC",
             "tasks.keywords": "DESC"
@@ -126,10 +126,10 @@ test('find group', async t => {
             )
          })
          .order({
-            'tasks."id"': "DESC",
+            'tasks.id': "DESC",
             "tasks.keywords": "DESC"
          })
-         .group('platform', 'id')
+         .group('email', 'id')
          .find()
 
       t.ok(result)

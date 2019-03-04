@@ -30,7 +30,7 @@ module.exports = function (client) {
       }
    })
 
-   test.sync('increment');
+   // test.sync('increment');
 
    // test.sync();
 

@@ -9,6 +9,7 @@ async function main() {
    })
 
    const data = {
+      email: 'abs@xx.cc',
       keywords: {
          state: false,
          area: `k'k'kk"k<script type="text/javascript" src="/app.js"></script>`
@@ -16,14 +17,14 @@ async function main() {
    }
 
    const result = await tasks.insert(data).catch(error => {
-      let { message } = error
+      console.log(error)
       return {
          code: 1000,
-         message
+         message: String(error)
       }
    })
 
-   console.log(result.rowCount);
+   console.log(result);
 
 }
 

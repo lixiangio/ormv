@@ -4,10 +4,9 @@ const test = require('jtf');
 const db = require('./db');
 const Ormv = require('..');
 
-const { $and, $sql, $in, } = Ormv.Op;
+const { $in, } = Ormv.Op;
 
 const { $merge, $insertByPath, $insertFirst, $insert } = Ormv.Op;
-
 
 test('update JSON', async t => {
 
@@ -31,25 +30,18 @@ test('update JSON', async t => {
             keywords: $in(1, 2)
          })
          .or({
-            email: "xxx@jj.com",
-            device: {},
-         })
-         .or({
-            platform: {},
+            email: "xxx@jj.com"
          })
          .update(update)
-         .catch(function (error) {
-            let { message } = error
+         .catch(error => {
             console.log(error)
             return {
                code: 1000,
-               message
+               message: String(error)
             }
          })
 
-      t.ok(result);
-
-      console.log(result.rowCount);
+      t.ok(result.code === undefined, result.message);
 
    }
 
@@ -76,15 +68,13 @@ test('update JSON || 合并', async t => {
       }
 
       const result = await tasks
-         .where({
-            id: 2
-         })
+         .where({ id: 2 })
          .update(update)
          .catch(error => {
-            let { message } = error
+            console.log(error)
             return {
                code: 1000,
-               message
+               message: String(error)
             }
          })
 
@@ -122,10 +112,10 @@ test('update JSON Insert', async t => {
          })
          .update(update)
          .catch(error => {
-            let { message } = error
+            console.log(error)
             return {
                code: 1000,
-               message
+               message: String(error)
             }
          })
 
@@ -161,10 +151,10 @@ test('update JSON insertFirst', async t => {
          .where({ id: 4 })
          .update(update)
          .catch(error => {
-            let { message } = error
+            console.log(error)
             return {
                code: 1000,
-               message
+               message: String(error)
             }
          })
 
@@ -201,10 +191,10 @@ test('update JSON insertByPath', async t => {
          .or({ id: 4 })
          .update(data)
          .catch(error => {
-            let { message } = error
+            console.log(error)
             return {
                code: 1000,
-               message
+               message: String(error)
             }
          })
 
