@@ -21,7 +21,9 @@ test('update JSON', async t => {
          keywords: {
             area: `7'7`,
             state: true
-         }
+         },
+         area: null,
+         state: false
       }
 
       const result = await tasks

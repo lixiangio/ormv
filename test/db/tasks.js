@@ -8,7 +8,7 @@ module.exports = function (client) {
    const tasks = client.define('tasks', {
       'id': {
          type: INTEGER,
-         primaryKey: true,
+         primaryKey: true
       },
       'keywords': {
          type: JSONB,
