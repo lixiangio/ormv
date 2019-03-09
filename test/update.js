@@ -28,8 +28,7 @@ test('update JSON', async t => {
 
       const result = await tasks
          .where({
-            id: 6,
-            keywords: $in(1, 2)
+            id: $in(6, 8, 9)
          })
          .or({
             email: "xxx@jj.com"
@@ -42,6 +41,8 @@ test('update JSON', async t => {
                message: String(error)
             }
          })
+
+      console.log(result)
 
       t.ok(result.code === undefined, result.message);
 
