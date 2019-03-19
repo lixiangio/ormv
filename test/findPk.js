@@ -9,8 +9,8 @@ async function main() {
    })
 
    const result = await tasks
-      .select('id', 'keywords')
       .findPk(6)
+      .select('id', 'keywords')
       .catch(error => {
          console.log(error)
          const { message } = error
@@ -20,7 +20,7 @@ async function main() {
          }
       })
 
-   console.log(result)
+   console.log(result);
 
 }
 

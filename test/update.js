@@ -27,13 +27,13 @@ test('update JSON', async t => {
       }
 
       const result = await tasks
+         .update(update)
          .where({
             id: $in(6, 8, 9)
          })
          .or({
             email: "xxx@jj.com"
          })
-         .update(update)
          .catch(error => {
             console.log(error)
             return {
@@ -71,8 +71,8 @@ test('update JSON || 合并', async t => {
       }
 
       const result = await tasks
-         .where({ id: 2 })
          .update(update)
+         .where({ id: 2 })
          .catch(error => {
             console.log(error)
             return {
@@ -110,10 +110,10 @@ test('update JSON Insert', async t => {
       }
 
       const result = await tasks
+         .update(update)
          .where({
             id: 4
          })
-         .update(update)
          .catch(error => {
             console.log(error)
             return {
@@ -151,8 +151,8 @@ test('update JSON insertFirst', async t => {
       }
 
       const result = await tasks
-         .where({ id: 4 })
          .update(update)
+         .where({ id: 4 })
          .catch(error => {
             console.log(error)
             return {
@@ -190,9 +190,9 @@ test('update JSON insertByPath', async t => {
       }
 
       const result = await tasks
+         .update(data)
          .where({ id: 4 })
          .or({ id: 4 })
-         .update(data)
          .catch(error => {
             console.log(error)
             return {

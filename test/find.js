@@ -14,9 +14,10 @@ test('no arguments ', async t => {
          console.log(error)
       })
 
-      const result = await tasks.find().catch(error => {
-         console.log(error)
-      })
+      const result = await tasks.find()
+         .catch(error => {
+            console.log(error)
+         })
 
       t.ok(result)
 
@@ -57,7 +58,9 @@ test('select', async t => {
             "tasks.keywords": "DESC"
          })
          .limit(10)
-         .find()
+         .then(data => {
+            return data
+         })
          .catch(error => {
             console.log(error)
          })
@@ -74,6 +77,7 @@ test('select', async t => {
 
 })
 
+
 test('no select', async t => {
 
    async function main() {
@@ -83,6 +87,7 @@ test('no select', async t => {
       })
 
       const result = await tasks
+         .find()
          .where({
             "tasks.id": 1,
             "tasks.email": "Kareem.Kerluke@yahoo.com"
@@ -91,7 +96,6 @@ test('no select', async t => {
             "tasks.id": "DESC",
             "tasks.keywords": "DESC"
          })
-         .find()
          .catch(error => {
             console.log(error)
          })
@@ -117,7 +121,7 @@ test('find group', async t => {
       })
 
       const result = await tasks
-         .select($sql(`count(*)`))
+         .select($sql('count(*)'))
          .where({
             id: $in(1, 34),
             email: $in(
@@ -130,7 +134,6 @@ test('find group', async t => {
             "tasks.keywords": "DESC"
          })
          .group('email', 'id')
-         .find()
 
       t.ok(result)
 

@@ -9,15 +9,14 @@ async function main() {
    })
 
    const result = await tasks
-      .where({
-         id: 50,
-         keywords: {}
+      .findOne({
+         id: 22,
+         // keywords: {}
       })
       .order({
          "tasks.id": "DESC",
          "tasks.keywords": "DESC"
       })
-      .findOne()
       .catch(error => {
          console.log(error)
       })

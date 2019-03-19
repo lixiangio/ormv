@@ -6,7 +6,7 @@ Postgresql ORM模型
 
 * 使用函数链风格的查询表达式，具有简约、直观、易于调试等特性
 
-* 在实现结构化查询的同时，依然保留了类似SQL的语法
+* 在实现结构化查询的同时，依然保留了类似SQL的语法特征
 
 * 支持对JSON类型字段建模，提供强大的嵌套数据校验功能
 
@@ -84,7 +84,6 @@ async function main() {
          "tasks.keywords": "DESC"
       })
       .limit(10)
-      .find()
       .catch(error => {
          console.log(error)
       })
@@ -149,6 +148,10 @@ model.sync('rebuild')
 #### model.find()
 
 查询多条记录
+
+#### model.select()
+
+查询多条记录，如果不想使用find()，可以用select()作为函数链入口
 
 #### model.findOne()
 

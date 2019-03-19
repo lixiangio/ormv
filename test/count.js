@@ -21,6 +21,16 @@ async function main() {
 
    console.log(result)
 
+   let query = tasks.find().select('id', 'keywords')
+
+   await query.then(function (data) {
+      console.log(data);
+   })
+
+   const count = await query.count();
+
+   console.log(count);
+
 }
 
 main().catch(error => {
