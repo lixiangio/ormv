@@ -23,9 +23,11 @@ async function main() {
 
    let query = tasks.find().select('id', 'keywords')
 
-   await query.then(function (data) {
-      console.log(data);
+   let value = await query.then(function (data) {
+      return data;
    })
+
+   console.log(value)
 
    const count = await query.count();
 

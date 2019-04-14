@@ -1,6 +1,6 @@
 {
   "name": "ormv",
-  "version": "0.3.0-alpha.0",
+  "version": "0.3.0-alpha.2",
   "description": "Postgresql ORM，为简化JSON操作定制",
   "main": "./lib/",
   "dependencies": {

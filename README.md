@@ -169,6 +169,10 @@ model.sync('rebuild')
 
 更新数据
 
+#### model.updateMerge(data)
+
+更新数据，用合并的方式更新json、jsonb类型
+
 #### model.destroy()
 
 删除数据
