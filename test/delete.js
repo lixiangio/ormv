@@ -13,15 +13,15 @@ test('destroy', async t => {
 
       const result = await tasks
          .delete()
-         .where({ id: 1 })
+         .where({ id: 11111111 })
          .or({ id: 3 })
          .catch(error => {
             console.log(error)
          })
 
-      t.ok(true)
-
       console.log(result);
+
+      t.deepEqual(result, { rowCount: 0 });
 
    }
 

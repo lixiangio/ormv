@@ -40,6 +40,70 @@ test('select', async t => {
       })
 
       const result = await tasks
+         .select('tasks.id', 'keywords', $as("tasks.email", "xx"), 'createdAt')
+         .limit(1)
+         .then(data => {
+            return data
+         })
+         .catch(error => {
+            console.log(error)
+         })
+
+      t.ok(true)
+
+      console.log(result)
+
+   }
+
+   await main().catch(error => {
+      console.log(error)
+   })
+
+})
+
+test('no select', async t => {
+
+   async function main() {
+
+      const { tasks } = await db().catch(error => {
+         console.log(error)
+      })
+
+      const result = await tasks
+         .find()
+         .where({
+            "tasks.id": 1,
+            "tasks.email": "Kareem.Kerluke@yahoo.com"
+         })
+         .order({
+            "tasks.id": "DESC",
+            "tasks.keywords": "DESC"
+         })
+         .catch(error => {
+            console.log(error)
+         })
+
+      t.ok(result)
+
+      console.log(result)
+
+   }
+
+   await main().catch(error => {
+      console.log(error)
+   })
+
+})
+
+test('leftJoin', async t => {
+
+   async function main() {
+
+      const { tasks } = await db().catch(error => {
+         console.log(error)
+      })
+
+      const result = await tasks
          .select('tasks.id', 'keywords', $as("tasks.email", "xx"))
          .leftJoin({ name: "user" })
          .on({ 'tasks.id': 'user.id' })
@@ -78,7 +142,7 @@ test('select', async t => {
 })
 
 
-test('no select', async t => {
+test('order', async t => {
 
    async function main() {
 
@@ -87,20 +151,20 @@ test('no select', async t => {
       })
 
       const result = await tasks
-         .find()
-         .where({
-            "tasks.id": 1,
-            "tasks.email": "Kareem.Kerluke@yahoo.com"
-         })
+         .select('tasks.id', 'keywords', $as("tasks.email", "xx"))
          .order({
             "tasks.id": "DESC",
             "tasks.keywords": "DESC"
+         })
+         .limit(3)
+         .then(data => {
+            return data
          })
          .catch(error => {
             console.log(error)
          })
 
-      t.ok(result)
+      t.ok(true)
 
       console.log(result)
 
@@ -111,6 +175,7 @@ test('no select', async t => {
    })
 
 })
+
 
 test('find group', async t => {
 
