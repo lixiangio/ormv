@@ -1,37 +1,29 @@
 'use strict'
 
-const db = require('./db')
+const test = require('jtf');
+const { Ormv, model } = require('./db');
 
-async function main() {
+const { tasks } = model;
 
-   const { tasks } = await db().catch(error => {
-      console.log(error)
-   })
+test('find_and_count', async t => {
 
-   const queryPromise = tasks
-      .find()
-      .select('id', 'keywords')
+   const queryPromise = tasks.find().select('id', 'keywords')
 
    const countPromise = tasks.count();
 
-   await Promise.all([queryPromise, countPromise])
-      .catch(error => {
+   await Promise.all([queryPromise, countPromise]).catch(error => {
 
-         console.log(error)
+      console.log(error)
 
-      })
-      .then(data => {
+   }).then(data => {
 
-         const [query, count] = data;
-         console.log(query);
-         console.log(count);
+      const [query, count] = data;
 
-      })
+      t.ok(query);
+      t.ok(count);
 
-   // console.log(count);
+      console.log(count);
 
-}
+   })
 
-main().catch(error => {
-   console.log(error)
 })

@@ -1,12 +1,13 @@
-'use strict'
+'use strict';
 
-const db = require('./db')
 
-async function main() {
+const test = require('jtf');
+const { Ormv, model } = require('./db');
 
-   const { tasks } = await db().catch(error => {
-      console.log(error)
-   })
+const { $sql, $and, $or, $in, $as } = Ormv.Op;
+const { tasks } = model;
+
+test('insert ', async t => {
 
    const data = {
       email: 'abs@xx.cc',
@@ -24,10 +25,8 @@ async function main() {
       }
    })
 
+   t.ok(result);
+   
    console.log(result);
 
-}
-
-main().catch(error => {
-   console.log(error)
 })

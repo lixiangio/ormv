@@ -1,12 +1,12 @@
 'use strict'
 
-const db = require('./db')
+const test = require('jtf');
+const { Ormv, model } = require('./db');
 
-async function main() {
+const { $sql, $and, $or, $in, $as } = Ormv.Op;
+const { tasks } = model;
 
-   const { tasks } = await db().catch(error => {
-      console.log(error)
-   })
+test('findOne ', async t => {
 
    const result = await tasks
       .findOne({
@@ -21,10 +21,8 @@ async function main() {
          console.log(error)
       })
 
+   t.ok(result);
+
    console.log(result)
 
-}
-
-main().catch(error => {
-   console.log(error)
 })

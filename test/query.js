@@ -1,12 +1,12 @@
-'use strict'
+'use strict';
 
-const db = require('./db')
+const test = require('jtf');
+const { Ormv, ormv, model } = require('./db');
 
-async function main() {
+const { $sql, $and, $or, $in, $as } = Ormv.Op;
+const { tasks } = model;
 
-   const { client } = await db().catch(error => {
-      console.log(error)
-   })
+test('query ', async t => {
 
    const sql = `UPDATE tasks SET keywords = jsonb_insert(keywords, $1, $2, $3) WHERE (id = '4')`
 
@@ -20,7 +20,7 @@ async function main() {
       false
    ]
 
-   const result1 = await client.query(sql, value).catch(error => {
+   const result1 = await ormv.query(sql, value).catch(error => {
       let { message } = error
       console.log(error)
       return {
@@ -28,6 +28,8 @@ async function main() {
          message
       }
    })
+
+   t.ok(result1);
 
    console.log(result1);
 
@@ -41,8 +43,5 @@ async function main() {
 
    // console.log(result2);
 
-}
 
-main().catch(error => {
-   console.log(error)
 })

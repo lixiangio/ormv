@@ -1,32 +1,36 @@
 'use strict'
 
 const test = require('jtf');
-const db = require('./db');
+const { Ormv, model } = require('./db');
 
-test('destroy', async t => {
+const { tasks } = model;
 
-   async function main() {
+test('destroy by id', async t => {
 
-      const { tasks } = await db().catch(error => {
+   const result = await tasks
+      .delete(3, 5, 9)
+      .catch(error => {
          console.log(error)
       })
 
-      const result = await tasks
-         .delete()
-         .where({ id: 11111111 })
-         .or({ id: 3 })
-         .catch(error => {
-            console.log(error)
-         })
+   console.log(result);
 
-      console.log(result);
+   t.deepEqual(result, { rowCount: 0 });
 
-      t.deepEqual(result, { rowCount: 0 });
+})
 
-   }
+test('destroy', async t => {
 
-   await main().catch(function (error) {
-      console.log(error)
-   })
+   const result = await tasks
+      .delete()
+      .where({ id: 11111111 })
+      .or({ id: 3 })
+      .catch(error => {
+         console.log(error)
+      })
+
+   console.log(result);
+
+   t.deepEqual(result, { rowCount: 0 });
 
 })

@@ -67,7 +67,7 @@ async function main() {
    // 基于数据模型的结构化查询
    const result = await tasks
       .select('id', 'keywords', $as("platform", "xx"))
-      .leftJoin(users)
+      .leftJoin("users")
       .on({ 'tasks.id': 'users.uid' })
       .where({
          id: $in(50, 51),
