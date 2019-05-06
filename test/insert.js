@@ -1,12 +1,11 @@
 'use strict';
 
 const test = require('jtf');
-const { Ormv, model } = require('./db');
+const { Ormv, model } = require('./db/');
 
-const { $sql, $and, $or, $in, $as } = Ormv.Op;
 const { tasks } = model;
 
-test('insert ', async t => {
+test('insert', async t => {
 
    const data = {
       email: 'abs@xx.cc',
@@ -17,11 +16,14 @@ test('insert ', async t => {
    }
 
    const result = await tasks.insert(data).catch(error => {
-      console.log(error)
+
+      console.log(error);
+
       return {
          code: 1000,
          message: String(error)
       }
+
    })
 
    t.ok(result);
