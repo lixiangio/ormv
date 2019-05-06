@@ -1,6 +1,6 @@
 'use strict';
 
-const Ormv = require('../../lib');
+const Ormv = require('../../lib/');
 
 const ormv = new Ormv({
    db: {
@@ -11,7 +11,7 @@ const ormv = new Ormv({
       port: 5432,
    },
    logger: true,
-})
+});
 
 ormv.connect();
 

@@ -6,7 +6,7 @@ const { Ormv, ormv, model } = require('./db');
 const { $sql, $and, $or, $in, $as } = Ormv.Op;
 const { tasks } = model;
 
-test('query ', async t => {
+test('sql', async t => {
 
    const sql = `UPDATE tasks SET keywords = jsonb_insert(keywords, $1, $2, $3) WHERE (id = '4')`
 

@@ -15,11 +15,18 @@ const tasks = ormv.define('tasks', {
          "area": {
             type: String,
          },
-         'state': {
-            type: Boolean,
-            defaultValue: false,
-         }
       }
+   },
+   'list': {
+      type: JSONB,
+      validate: [
+         {
+            'state': {
+               type: Boolean,
+               defaultValue: false,
+            }
+         }
+      ]
    },
    'email': {
       type: STRING,

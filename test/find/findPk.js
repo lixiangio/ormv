@@ -1,9 +1,9 @@
 'use strict'
 
 const test = require('jtf');
-const { Ormv, model } = require('./db');
+const typea = require('typea');
+const { Ormv, model } = require('../db/');
 
-const { $sql, $and, $or, $in, $as } = Ormv.Op;
 const { tasks } = model;
 
 test('findPk ', async t => {
@@ -12,16 +12,22 @@ test('findPk ', async t => {
       .findPk(6)
       .select('id', 'keywords')
       .catch(error => {
-         console.log(error)
-         const { message } = error
+         const { message } = error;
          return {
             code: 1000,
             message
          }
       })
 
-   t.ok(result);
+   const { error, data } = typea(result, {
+      id: Number,
+      keywords: Object,
+   })
 
-   console.log(result);
+   if (error) {
+      throw TypeError(error);
+   } else {
+      t.ok(data)
+   }
 
 })

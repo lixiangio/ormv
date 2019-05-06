@@ -1,11 +1,11 @@
 'use strict'
 
 const test = require('jtf');
-const { Ormv, model } = require('./db');
+const { Ormv, model } = require('../db');
 
 const { tasks } = model;
 
-test('updateMerge JSON || 合并', async t => {
+test('updateMerge', async t => {
 
    const update = {
       "keywords": {
@@ -17,6 +17,7 @@ test('updateMerge JSON || 合并', async t => {
    const result = await tasks
       .updateMerge(update)
       .where({ id: 2 })
+      .return()
       .catch(error => {
          console.log(error)
          return {
@@ -25,7 +26,7 @@ test('updateMerge JSON || 合并', async t => {
          }
       })
 
-   t.ok(result)
+   t.ok(result);
 
    console.log(result.rowCount);
 

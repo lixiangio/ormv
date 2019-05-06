@@ -1,6 +1,5 @@
 'use strict';
 
-
 const test = require('jtf');
 const { Ormv, model } = require('./db');
 

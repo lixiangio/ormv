@@ -1,10 +1,12 @@
-'use strict'
+'use strict';
+
+return
 
 const Ormv = require('../../lib');
 
 const { Op } = Ormv;
 
-const { $and, $in, $lte } = Op
+const { $and, $in, $lte } = Op;
 
 let options = $and({
    id: 6,

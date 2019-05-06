@@ -1,9 +1,8 @@
 'use strict';
 
 const test = require('jtf');
-const { Ormv, ormv, model } = require('./db');
+const { Ormv, ormv, model } = require('../db/');
 
-const { $sql, $and, $or, $in, $as } = Ormv.Op;
 const { tasks } = model;
 
 test('query ', async t => {
@@ -21,15 +20,15 @@ test('query ', async t => {
 
    t.ok(result);
 
-   console.log(result)
+   console.log(result);
 
-   let query = tasks.find().select('id', 'keywords')
+   let query = tasks.select('id', 'keywords')
 
    let value = await query.then(function (data) {
       return data;
    })
 
-   console.log(value)
+   // console.log(value)
 
    const count = await query.count();
 
