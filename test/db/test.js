@@ -2,7 +2,7 @@
 
 const { Ormv, ormv } = require('./Ormv.js');
 
-const { CHAR, INTEGER, JSONB, BOOLEAN } = Ormv.Type;
+const { CHAR, INTEGER, ARRAY, BOOLEAN } = Ormv.Type;
 
 const test = ormv.define('test', {
    'id': {
@@ -13,7 +13,7 @@ const test = ormv.define('test', {
       type: CHAR,
    },
    'address': {
-      type: JSONB,
+      type: ARRAY,
       defaultValue: [],
    },
    'email': {

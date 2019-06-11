@@ -16,7 +16,7 @@ test('updateMerge', async t => {
 
    const result = await tasks
       .updateMerge(update)
-      .where({ id: 2 })
+      .where({ id: 90 })
       .return()
       .catch(error => {
          console.log(error)
@@ -28,6 +28,6 @@ test('updateMerge', async t => {
 
    t.ok(result);
 
-   console.log(result.rowCount);
+   console.log(result);
 
 })

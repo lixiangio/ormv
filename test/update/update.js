@@ -10,12 +10,10 @@ test('update', async t => {
 
    const update = {
       email: "adb@qq.com",
-      keywords: [
-         {
-            area: `7'7`,
-            state: true
-         }
-      ],
+      keywords: {
+         area: `7'7`,
+         state: true
+      },
       area: null,
       state: false
    }

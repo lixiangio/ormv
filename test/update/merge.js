@@ -3,20 +3,18 @@
 const test = require('jtf');
 const { Ormv, model } = require('../db/');
 
-const { $merge, } = Ormv.Op;
+const { $merge } = Ormv.Op;
 const { tasks } = model;
 
 test('update $merge', async t => {
 
-   const update = {
-      "keywords": $merge({
-         "area": "5'68",
-         "state": false
-      })
-   }
-
    const result = await tasks
-      .update(update)
+      .update({
+         "keywords": $merge({
+            "area": "5'68",
+            "state": false
+         })
+      })
       .where({ id: 2 })
       .catch(error => {
          console.log(error)

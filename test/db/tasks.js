@@ -2,7 +2,7 @@
 
 const { Ormv, ormv } = require('./Ormv.js');
 
-const { STRING, INTEGER, JSONB, BOOLEAN } = Ormv.Type;
+const { STRING, INTEGER, OBJECT, ARRAY, BOOLEAN } = Ormv.Type;
 
 const tasks = ormv.define('tasks', {
    'id': {
@@ -10,7 +10,7 @@ const tasks = ormv.define('tasks', {
       primaryKey: true
    },
    'keywords': {
-      type: JSONB,
+      type: OBJECT,
       validate: {
          "area": {
             type: String,
@@ -18,7 +18,7 @@ const tasks = ormv.define('tasks', {
       }
    },
    'list': {
-      type: JSONB,
+      type: ARRAY,
       validate: [
          {
             'state': {

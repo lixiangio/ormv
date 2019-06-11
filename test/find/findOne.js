@@ -9,10 +9,7 @@ const { tasks } = model;
 test('findOne ', async t => {
 
    const result = await tasks
-      .findOne({
-         id: 22,
-         // keywords: {}
-      })
+      .findOne({ id: 88, })
       .order({
          "tasks.id": "DESC",
          "tasks.keywords": "DESC"
@@ -23,7 +20,7 @@ test('findOne ', async t => {
 
    const { error, data } = typea(result, {
       id: Number,
-      keywords: Array,
+      keywords: Object,
       email: String,
       area: String,
       state: Boolean,

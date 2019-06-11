@@ -5,10 +5,10 @@ const { Ormv, model } = require('./db');
 
 const { tasks } = model;
 
-test('destroy by id', async t => {
+test('deletePk', async t => {
 
    const result = await tasks
-      .delete(3, 5, 9)
+      .deletePk(3, 5, 9)
       .catch(error => {
          console.log(error)
       })
@@ -22,8 +22,7 @@ test('destroy by id', async t => {
 test('destroy', async t => {
 
    const result = await tasks
-      .delete()
-      .where({ id: 11111111 })
+      .delete({ id: 11111111 })
       .or({ id: 3 })
       .catch(error => {
          console.log(error)

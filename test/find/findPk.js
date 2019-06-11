@@ -9,7 +9,7 @@ const { tasks } = model;
 test('findPk ', async t => {
 
    const result = await tasks
-      .findPk(6)
+      .findPk(89)
       .select('id', 'keywords')
       .catch(error => {
          const { message } = error;

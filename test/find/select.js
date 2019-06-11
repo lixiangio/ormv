@@ -15,7 +15,7 @@ test('no arguments ', async t => {
 
    const { error, data } = typea(result, [{
       id: Number,
-      keywords: Array,
+      keywords: Object,
       email: String,
       area: String,
       state: Boolean,
@@ -47,7 +47,7 @@ test('select', async t => {
 
    const { error, data } = typea(result, [{
       id: Number,
-      keywords: Array,
+      keywords: Object,
       xx: String,
    }])
 

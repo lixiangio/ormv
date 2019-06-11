@@ -1,18 +1,20 @@
 {
   "name": "ormv",
-  "version": "0.3.1-alpha.8",
+  "version": "0.3.1-alpha.12",
   "description": "Postgresql ORM，为简化JSON操作定制",
   "main": "./lib/",
   "dependencies": {
     "dayjs": "^1.8.6",
     "pg": "^7.8.0",
-    "typea": "^4.4.4",
-    "validator": "^10.11.0"
+    "typea": "^4.4.5"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "lib"
+  ],
   "author": "",
   "license": "ISC"
 }
