@@ -4,7 +4,7 @@ const test = require('jtf');
 const typea = require('typea');
 const { Ormv, model } = require('../db/');
 
-const { $sql, $and, $or, $in, $as } = Ormv.Op;
+const { $sql, $in, $as } = Ormv.Op;
 const { tasks } = model;
 
 test('no arguments ', async t => {
@@ -67,8 +67,8 @@ test('no select', async t => {
          "tasks.email": "adb@qq.com"
       })
       .order({
-         "tasks.id": "DESC",
-         "tasks.keywords": "DESC"
+         "tasks.id": "desc",
+         "tasks.keywords": "desc"
       })
       .catch(error => {
          console.log(error)
@@ -76,7 +76,7 @@ test('no select', async t => {
 
    const { error, data } = typea(result, [{
       "email": "adb@qq.com"
-   }])
+   }]);
 
    if (error) {
       throw TypeError(error);

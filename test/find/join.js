@@ -4,7 +4,7 @@ const test = require('jtf');
 const typea = require('typea');
 const { Ormv, model } = require('../db/');
 
-const { $sql, $and, $or, $in, $as } = Ormv.Op;
+const { $sql, $in, $as } = Ormv.Op;
 const { tasks } = model;
 
 test('leftJoin', async t => {
@@ -41,12 +41,12 @@ test('leftJoin', async t => {
 test('rightJoin', async t => {
 
    const result = await tasks
-      .select('tasks.id', 'keywords', $as("tasks.email", "xx"))
+      .select('tasks.id', 'keywords', $as("tasks.email", "tasks.xx"))
       .rightJoin("user")
       .on({ 'tasks.id': 'user.id' })
       .where({
          'tasks.id': $in(50, 51),
-         keywords: {}
+         "keywords": {}
       })
       .or({ 
          'tasks.id': 5 ,

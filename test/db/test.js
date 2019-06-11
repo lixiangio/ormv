@@ -2,29 +2,29 @@
 
 const { Ormv, ormv } = require('./Ormv.js');
 
-const { CHAR, INTEGER, ARRAY, BOOLEAN } = Ormv.Type;
+const { char, email, integer, array, boolean } = Ormv.Type;
 
 const test = ormv.define('test', {
    'id': {
-      type: INTEGER,
+      type: integer,
       primaryKey: true,
    },
    'name': {
-      type: CHAR,
+      type: char,
    },
    'address': {
-      type: ARRAY,
+      type: array,
       defaultValue: [],
    },
    'email': {
-      type: CHAR,
+      type: email,
    },
    'fftftg': {
-      type: CHAR,
+      type: char,
       defaultValue: "yyy",
    },
    'dfd': {
-      type: CHAR,
+      type: char,
       defaultValue: "uutyty",
    }
 })

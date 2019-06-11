@@ -3,7 +3,7 @@
 const test = require('jtf');
 const { Ormv, ormv, model } = require('./db');
 
-const { $sql, $and, $or, $in, $as } = Ormv.Op;
+const { $sql, $in, $as } = Ormv.Op;
 const { tasks } = model;
 
 test('sql', async t => {
@@ -42,6 +42,5 @@ test('sql', async t => {
    // })
 
    // console.log(result2);
-
 
 })

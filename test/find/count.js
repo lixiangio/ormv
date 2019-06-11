@@ -5,13 +5,28 @@ const { Ormv, ormv, model } = require('../db/');
 
 const { tasks } = model;
 
-test('query ', async t => {
+test('count', async t => {
+
+   const query = tasks.find({ 'tasks.id': 50, })
+
+   const count = query.count();
+
+   const result = await Promise.all([query, count]);
+
+   t.ok(result);
+
+   console.log(result);
+
+})
+
+
+test('find chain', async t => {
 
    const result = await tasks
+      .find({ 'tasks.id': 50, })
       .count()
       .catch(error => {
-         console.log(error)
-         const { message } = error
+         const { message } = error;
          return {
             code: 1000,
             message
@@ -21,17 +36,5 @@ test('query ', async t => {
    t.ok(result);
 
    console.log(result);
-
-   let query = tasks.select('id', 'keywords')
-
-   let value = await query.then(function (data) {
-      return data;
-   })
-
-   // console.log(value)
-
-   const count = await query.count();
-
-   console.log(count);
 
 })

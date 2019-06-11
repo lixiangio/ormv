@@ -2,45 +2,40 @@
 
 const { Ormv, ormv } = require('./Ormv.js');
 
-const { STRING, INTEGER, OBJECT, ARRAY, BOOLEAN } = Ormv.Type;
+const { string, email, integer, object, array, boolean } = Ormv.Type;
 
 const tasks = ormv.define('tasks', {
    'id': {
-      type: INTEGER,
-      primaryKey: true
+      "type": integer,
+      "primaryKey": true
    },
    'keywords': {
-      type: OBJECT,
-      validate: {
+      "type": object,
+      "validate": {
          "area": {
-            type: String,
+            "type": String,
          },
       }
    },
    'list': {
-      type: ARRAY,
-      validate: [
-         {
-            'state': {
-               type: Boolean,
-               defaultValue: false,
-            }
+      'type': array,
+      'validate': [{
+         'state': {
+            "type": Boolean,
+            "defaultValue": false,
          }
-      ]
+      }]
    },
    'email': {
-      type: STRING,
-      validate: {
-         isEmail: true,
-      }
+      'type': email,
    },
    "area": {
-      type: STRING,
-      allowNull: true,
+      'type': string,
+      'allowNull': true,
    },
    'state': {
-      type: BOOLEAN,
-      defaultValue: true,
+      'type': boolean,
+      'defaultValue': true,
    }
 })
 

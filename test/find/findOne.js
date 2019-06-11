@@ -11,8 +11,8 @@ test('findOne ', async t => {
    const result = await tasks
       .findOne({ id: 88, })
       .order({
-         "tasks.id": "DESC",
-         "tasks.keywords": "DESC"
+         "tasks.id": "desc",
+         "tasks.keywords": "desc"
       })
       .catch(error => {
          console.log(error)

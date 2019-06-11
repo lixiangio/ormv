@@ -4,7 +4,7 @@ const test = require('jtf');
 const typea = require('typea');
 const { Ormv, model } = require('../db/');
 
-const { $sql, $and, $or, $in, $as } = Ormv.Op;
+const { $sql, $in, $as } = Ormv.Op;
 const { tasks } = model;
 
 test('find group', async t => {
@@ -20,8 +20,8 @@ test('find group', async t => {
       })
       .group('email', 'id')
       .order({
-         'id': "DESC",
-         "keywords": "DESC"
+         'id': "desc",
+         "keywords": "desc"
       })
 
    t.ok(result);

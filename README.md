@@ -14,7 +14,7 @@ Postgresql ORM模型
 
 ## 感悟
 
-由于SQL语言自身的快速迭代、兼容性、复杂性、灵活性等因素，现有的ORM很难优雅的转译原生SQL的所有功能，特别是在生成一些复杂或边缘化的SQL语句时，表现得非常鸡肋且性能低下。因此，ormv不再追求大而全，未来的目标是专注于优化常见的查询用例，在性能和开发体验之间找到最佳平衡点，对于复杂用例应该优先考虑原生sql拼接。
+由于SQL语言自身的快速迭代、兼容性、复杂性、灵活性等因素，现有的ORM很难优雅的合成原生SQL的所有功能，特别是在生成一些复杂或边缘化的SQL语句时，表现得非常鸡肋且性能低下。因此，ormv不再追求大而全，未来的目标是专注于优化常见的高频查询用例，在性能和开发体验之间找到最佳平衡点，对于复杂用例应该优先考虑原生sql拼接。
 
 ## Install
 
@@ -45,27 +45,24 @@ async function main() {
    // sql查询，支持参数化查询
    await client.query(sql)
 
-   const { CHAR, INTEGER, JSONB, BOOLEAN } = Ormv.Type
+   const { char, email, integer, json, boolean } = Ormv.Type;
 
    // 数据表建模
    const tasks = client.define('tasks', {
       'id': {
-         type: INTEGER,
+         type: integer,
          primaryKey: true,
       },
       'keywords': {
-         type: JSONB
+         type: json
       },
       'email': {
-         type: CHAR,
-         validate: {
-            isEmail: true
-         }
+         type: email,
       },
    })
 
    // 操作符
-   const { $and, $in, $as } = Ormv.Op;
+   const { $as } = Ormv.Op;
 
    // 基于数据模型的结构化查询
    const result = await tasks
@@ -76,15 +73,19 @@ async function main() {
          id: $in(50, 51),
          keywords: {}
       })
-      .or({ id: 5 })
-      .and({
-         id: 5,
-         keywords: {}
-      })
+      .and(
+         {
+            id: 5,
+         },
+         // or
+         { 
+            keywords: {}
+         }
+      )
       .or({ id: 5 })
       .order({
-         "tasks.id": "DESC",
-         "tasks.keywords": "DESC"
+         "tasks.id": "desc",
+         "tasks.keywords": "desc"
       })
       .limit(10)
       .catch(error => {
@@ -186,8 +187,6 @@ model.sync('rebuild')
 
 查询数据总量
 
-
-
 ### update 函数链
 
 #### model.update(data)
@@ -198,42 +197,41 @@ model.sync('rebuild')
 
 更新数据，用合并的方式更新json、jsonb类型
 
+#### model.updatePK(id, data)
 
-### destroy 函数链
+更新指定主键的数据
 
-#### model.destroy()
+### delete 函数链
 
-删除数据
+#### model.delete(options)
 
+删除多条数据
 
-### find、update、destroy 通用逻辑函数链
+#### model.deletePK(id)
 
-#### model.where(options)
+删除指定主键的数据
 
-#### where(options).and(options)
+### 通用逻辑函数链 where(options).and.(options)or.(options)
 
-#### where(options).or(options)
+逻辑函数链同时适用于find、update、delete操作。支持多个options参数，每个options内的子节点之间为and关系，options与options之间为or关系
 
-* options `Object` - and过滤条件
+该设计方案的优点是结构简单、逻辑清晰、易解析。缺点是仅支持双层嵌套逻辑关系，但可满足大多数逻辑应用场景。
 
-<!-- * transaction `*` - 事务选项，待开发 -->
+* options `Object` - and条件集合
 
+```js
+model.where(options, options, ...);
+
+model.where(options).and(options, options, ...).or(options, options, ...);
+```
+
+<!-- ### 事务 -->
 
 ## 操作符函数
 
 ### 查询函数
 
 > 用于options.where属性中，作为数据筛选条件，包含逻辑运算符、比较运算符等。
-
-<!-- ### 逻辑运算符
-
-#### Op.$and()
-
-逻辑与，支持链式操作
-
-#### Op.$or()
-
-逻辑或，支持链式操作 -->
 
 ### 原生sql运算符
 
