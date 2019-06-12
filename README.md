@@ -14,7 +14,7 @@ Postgresql ORM模型
 
 ## 感悟
 
-由于SQL语言自身的快速迭代、兼容性、复杂性、灵活性等因素，现有的ORM很难优雅的合成原生SQL的所有功能，特别是在生成一些复杂或边缘化的SQL语句时，表现得非常鸡肋且性能低下。因此，ormv不再追求大而全，未来的目标是专注于优化常见的高频查询用例，在性能和开发体验之间找到最佳平衡点，对于复杂用例应该优先考虑原生sql拼接。
+由于SQL语言自身的快速迭代、兼容性、灵活性、复杂性等因素，现有的ORM很难优雅的合成原生SQL的所有功能，特别是在生成一些复杂或边缘化的SQL语句时，表现得非常鸡肋且性能低下。因此，ormv不再追求大而全，未来的目标是专注于优化常见的高频查询用例，期望在性能和开发体验之间找到最佳平衡点，对于复杂用例应该优先考虑原生sql拼接。
 
 ## Install
 
@@ -36,14 +36,12 @@ async function main() {
          password: 'postgres',
          port: 5432,
       },
-      logger: true
-   })
+      logger: true, // 显示合成sql
+   });
 
-   // 连接数据库
-   await client.connect()
+   await client.connect(); // 连接数据库
 
-   // sql查询，支持参数化查询
-   await client.query(sql)
+   await client.query(`sql ...`); // 原生sql查询，支持参数化查询
 
    const { char, email, integer, json, boolean } = Ormv.Type;
 
@@ -54,15 +52,14 @@ async function main() {
          primaryKey: true,
       },
       'keywords': {
-         type: json
+         type: json,
       },
       'email': {
          type: email,
       },
    })
 
-   // 操作符
-   const { $as } = Ormv.Op;
+   const { $as, $in } = Ormv.Op; // 操作符
 
    // 基于数据模型的结构化查询
    const result = await tasks
@@ -78,7 +75,7 @@ async function main() {
             id: 5,
          },
          // or
-         { 
+         {
             keywords: {}
          }
       )
@@ -88,9 +85,6 @@ async function main() {
          "tasks.keywords": "desc"
       })
       .limit(10)
-      .catch(error => {
-         console.log(error)
-      })
 
 }
 ```
@@ -111,10 +105,10 @@ async function main() {
 
 ### 默认模式
 
-> 尝试创建新的数据表，当指定的表已存在时请求被拒绝，不做任何操作。
+> 无参数时会尝试创建新的数据表，当指定的表已存在时请求被拒绝，不做任何操作。
 
 ```js
-model.sync()
+model.sync();
 ```
 
 ### 增量模式
@@ -122,20 +116,20 @@ model.sync()
 > 在已有表上新增字段，该模式只会添加新的列，不改变已有列和数据。
 
 ```js
-model.sync('increment')
+model.sync('increment');
 ```
 
-### 重置模式
+### 重置模式（危险）
 
 > 删除已有的数据表重新构建表结构。
 
 ```js
-model.sync('rebuild')
+model.sync('rebuild');
 ```
 
 ## 函数链
 
-函数链用于生成相对安全的Sql语句，尽可能避免SQL注入。
+函数链提供了一种更加便捷、严谨和安全的sql编码方式，主要目的是尽可能避免SQL注入。
 
 ### insert 函数链
 
