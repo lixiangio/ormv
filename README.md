@@ -14,7 +14,7 @@ Postgresql ORM模型
 
 ## 感悟
 
-由于SQL语言自身的快速迭代、兼容性、灵活性、复杂性等因素，现有的ORM很难优雅的合成原生SQL的所有功能，特别是在生成一些复杂或边缘化的SQL语句时，表现得非常鸡肋且性能低下。因此，ormv不再追求大而全，未来的目标是专注于优化常见的高频查询用例，期望在性能和开发体验之间找到最佳平衡点，对于复杂用例应该优先考虑原生sql拼接。
+受SQL语言兼容性、灵活性、复杂性等因素的影响，现有ORM很难优雅的实现原生SQL的所有功能，在针对某些复杂或边缘化的查询用例时显得非常鸡肋，可读性很差且性能低下。因此，ormv不再追求大而全，未来的目标将专注于优化常见的高频查询用例，期望在性能和开发体验之间找到最佳平衡点，对于复杂用例应该优先考虑原生sql拼接。
 
 ## Install
 
@@ -64,7 +64,7 @@ async function main() {
    // 基于数据模型的结构化查询
    const result = await tasks
       .select('id', 'keywords', $as("platform", "xx"))
-      .left_join("users")
+      .leftJoin("users")
       .on({ 'tasks.id': 'users.uid' })
       .where({
          id: $in(50, 51),

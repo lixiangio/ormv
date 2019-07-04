@@ -1,6 +1,6 @@
 'use strict';
 
-const { Ormv, ormv } = require('./Ormv.js');
+const { Ormv, ormv } = require('./connect.js');
 const tasks = require('./tasks.js');
 const test = require('./test.js');
 
