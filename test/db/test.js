@@ -19,14 +19,6 @@ const test = ormv.define('test', {
    'email': {
       type: email,
    },
-   'fftftg': {
-      type: char,
-      defaultValue: "yyy",
-   },
-   'dfd': {
-      type: char,
-      defaultValue: "uutyty",
-   }
 })
 
 // test.sync('increment');

@@ -7,7 +7,7 @@ const { Ormv, model } = require('../db/');
 const { $sql, $in, $as } = Ormv.Op;
 const { tasks } = model;
 
-test('leftJoin', async t => {
+test('left join', async t => {
 
    const result = await tasks
       .select('tasks.id', 'keywords', $as("tasks.email", "xx"))
@@ -34,14 +34,29 @@ test('leftJoin', async t => {
          console.log(error)
       })
 
-   t.ok(result)
+      const { error, data } = typea(result, [{
+         id: Number,
+         keywords: Object,
+         email: String,
+         area: String,
+         state: Boolean,
+         createdAt: Date,
+         updatedAt: Date,
+         list: Array
+      }])
+   
+      if (error) {
+         throw TypeError(error);
+      } else {
+         t.ok(data)
+      }
 
 })
 
-test('rightJoin', async t => {
+test('right join', async t => {
 
    const result = await tasks
-      .select('tasks.id', 'keywords', $as("tasks.email", "tasks.xx"))
+      .select('tasks.id', 'keywords', $as("tasks.email", "xx"))
       .rightJoin("user")
       .on({ 'tasks.id': 'user.id' })
       .where({
@@ -58,13 +73,25 @@ test('rightJoin', async t => {
       })
       .or({ 'tasks.id': 5 })
       .limit(10)
-      .then(data => {
-         return data
-      })
       .catch(error => {
          console.log(error)
       })
 
-   t.ok(result)
+      const { error, data } = typea(result, [{
+         id: Number,
+         keywords: Object,
+         email: String,
+         area: String,
+         state: Boolean,
+         createdAt: Date,
+         updatedAt: Date,
+         list: Array
+      }])
+   
+      if (error) {
+         throw TypeError(error);
+      } else {
+         t.ok(data)
+      }
 
 })
