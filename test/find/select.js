@@ -7,31 +7,6 @@ const { Ormv, model } = require('../db/');
 const { $sql, $in, $as } = Ormv.Op;
 const { tasks } = model;
 
-test('no arguments ', async t => {
-
-   const result = await tasks.find().limit(3).catch(error => {
-      console.log(error)
-   })
-
-   const { error, data } = typea(result, [{
-      id: Number,
-      keywords: Object,
-      email: String,
-      area: String,
-      state: Boolean,
-      createdAt: Date,
-      updatedAt: Date,
-      list: Array
-   }])
-
-   if (error) {
-      throw TypeError(error);
-   } else {
-      t.ok(data)
-   }
-
-})
-
 test('select', async t => {
 
    const result = await tasks

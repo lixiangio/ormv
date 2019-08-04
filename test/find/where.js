@@ -9,7 +9,7 @@ const { tasks } = model;
 
 test('leftJoin', async t => {
 
-   const result = await tasks
+   const chan = tasks
       .select('tasks.id', 'keywords', $as("tasks.email", "xx"))
       .leftJoin("user")
       .on({ 'tasks.id': 'user.id' })
@@ -27,12 +27,12 @@ test('leftJoin', async t => {
       })
       .or({ 'tasks.id': 5 })
       .limit(10)
-      .then(data => {
-         return data
-      })
-      .catch(error => {
-         console.log(error)
-      })
+
+   const result = await chan.then(data => {
+      return data
+   }).catch(error => {
+      console.log(error)
+   })
 
    t.ok(result)
 

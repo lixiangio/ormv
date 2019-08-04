@@ -1,6 +1,6 @@
 'use strict';
 
-const { Ormv, ormv } = require('./connect.js');
+const { Ormv, ormv } = require('../connect.js');
 
 const { char, email, integer, array, boolean } = Ormv.Type;
 
