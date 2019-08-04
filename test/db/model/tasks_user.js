@@ -22,6 +22,6 @@ const model = tasks
    .innerJoin('user')
    .on({ 'tasks.uid': 'user.id' })
 
-   console.log(model.sql)
+   // console.log(model.model)
 
 module.exports = model;

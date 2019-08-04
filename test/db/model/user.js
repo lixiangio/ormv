@@ -31,6 +31,6 @@ const model = ormv.define('user', {
    }
 });
 
-// model.sync()
+// model.sync();
 
 module.exports = model;
