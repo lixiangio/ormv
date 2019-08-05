@@ -1,11 +1,11 @@
 'use strict';
 
-const { Ormv } = require('../connect.js');
-const tasks = require('./tasks.js');
+const { Ormv, model } = require('..');
 
 const { $as } = Ormv.Op;
+const { tasks } = model;
 
-const model = tasks
+const findModel = tasks
    .select(
       'document.id',
       $as('document.uid', 'uid'),
@@ -17,11 +17,11 @@ const model = tasks
       'user.password',
       'user.email',
       'document.createdAt',
-      'document.updatedAt',
+      'document.updatedAt'
    )
    .innerJoin('user')
    .on({ 'tasks.uid': 'user.id' })
 
-   // console.log(model.model)
+console.log(Object.getPrototypeOf(findModel))
 
-module.exports = model;
+module.exports = findModel;

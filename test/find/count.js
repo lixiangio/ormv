@@ -7,7 +7,7 @@ const { tasks } = model;
 
 test('count', async t => {
 
-   const query = tasks.find({ 'tasks.id': 50, })
+   const query = tasks.find({ 'id': 50, })
 
    const count = query.count();
 
@@ -23,7 +23,7 @@ test('count', async t => {
 test('find chain', async t => {
 
    const result = await tasks
-      .find({ 'tasks.id': 50, })
+      .find({ 'id': 50, })
       .count()
       .catch(error => {
          const { message } = error;
