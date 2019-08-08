@@ -9,6 +9,9 @@ const tasks = ormv.define('tasks', {
       "type": integer,
       "primaryKey": true
    },
+   'uid': {
+      "type": integer
+   },
    'keywords': {
       "type": object,
       "validate": {
@@ -26,9 +29,6 @@ const tasks = ormv.define('tasks', {
          }
       }]
    },
-   'email': {
-      'type': email,
-   },
    "area": {
       'type': string,
       'allowNull': true,
@@ -38,7 +38,5 @@ const tasks = ormv.define('tasks', {
       'defaultValue': true,
    }
 })
-
-// tasks.sync('increment');
 
 module.exports = tasks;

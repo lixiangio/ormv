@@ -10,10 +10,10 @@ const { tasks } = model;
 test('order', async t => {
 
    const result = await tasks
-      .select('tasks.id', 'keywords', $as("tasks.email", "xx"))
+      .select('id', 'keywords', $as("email", "xx"))
       .order({
-         "tasks.id": "desc",
-         "tasks.keywords": "desc"
+         "id": "desc",
+         "keywords": "desc"
       })
       .limit(3)
       .then(data => {

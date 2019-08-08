@@ -10,7 +10,7 @@ const { tasks } = model;
 test('select', async t => {
 
    const result = await tasks
-      .select('id', 'tasks.keywords', $as("tasks.email", "xx"), 'createdAt')
+      .select('id', 'keywords', $as("email", "xx"), 'createdAt')
       .offset(0)
       .limit(3)
       .then(data => {
@@ -39,11 +39,11 @@ test('no select', async t => {
    const result = await tasks
       .find()
       .where({
-         "tasks.email": "adb@qq.com"
+         "email": "adb@qq.com"
       })
       .order({
-         "tasks.id": "desc",
-         "tasks.keywords": "desc"
+         "id": "desc",
+         "keywords": "desc"
       })
       .catch(error => {
          console.log(error)

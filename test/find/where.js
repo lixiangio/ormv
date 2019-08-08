@@ -10,17 +10,14 @@ const { tasks } = model;
 test('leftJoin', async t => {
 
    const chan = tasks
-      .select('tasks.id', 'keywords', $as("tasks.email", "xx"))
+      .select('tasks.id', 'tasks.keywords', $as("user.email", "xx"))
       .leftJoin("user")
-      .on({ 'tasks.id': 'user.id' })
+      .on({ 'tasks.uid': "user.id" })
       .where({
          'tasks.id': $in(50, 51),
-         keywords: {}
+         'keywords': {}
       })
-      .or({
-         'tasks.id': 5,
-         'tasks.email': "adb@qq.com"
-      })
+      .or({ 'tasks.uid': 1 })
       .and({
          'tasks.id': 5,
          "keywords": {}

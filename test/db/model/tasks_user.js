@@ -1,27 +1,32 @@
 'use strict';
 
-const { Ormv, model } = require('..');
+const { Ormv, ormv } = require('../connect.js');
+const tasks = require('./tasks.js');
+const user = require('./user.js');
 
 const { $as } = Ormv.Op;
-const { tasks } = model;
 
-const findModel = tasks
-   .select(
-      'document.id',
-      $as('document.uid', 'uid'),
-      'document.title',
-      'document.document',
+const tasksUser = ormv.merge({
+   modules: [tasks, user],
+   condition: { 'tasks.uid': 'user.id' },
+   fields: [
+      'tasks.id',
+      'tasks.uid',
+      'tasks.keywords',
+      'tasks.list',
+      'tasks.area',
+      'tasks.state',
+      'tasks.createdAt',
+      'tasks.updatedAt',
       'user.name',
-      'user.age',
+      'user.image',
       'user.phone',
-      'user.password',
       'user.email',
-      'document.createdAt',
-      'document.updatedAt'
-   )
-   .innerJoin('user')
-   .on({ 'tasks.uid': 'user.id' })
+      $as('user.age', 'xxx'),
+      $as('user.age', 'ggr'),
+   ],
+});
 
-console.log(Object.getPrototypeOf(findModel))
+// console.log(tasksUser);
 
-module.exports = findModel;
+module.exports = tasksUser;

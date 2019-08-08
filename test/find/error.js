@@ -4,11 +4,11 @@ const test = require('jtf');
 const typea = require('typea');
 const { Ormv, model } = require('../db/');
 
-const { test_error } = model;
+const { error: modelError } = model;
 
-test('error ', async t => {
+test('error', async t => {
 
-   const result = await test_error
+   const result = await modelError
       .find({ "abs": 89 })
       .catch(error => {
          const { message } = error;
