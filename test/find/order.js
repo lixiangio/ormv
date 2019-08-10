@@ -4,13 +4,13 @@ const test = require('jtf');
 const typea = require('typea');
 const { Ormv, model } = require('../db/');
 
-const { $sql, $in, $as } = Ormv.Op;
+const { $as } = Ormv.Op;
 const { tasks } = model;
 
 test('order', async t => {
 
    const result = await tasks
-      .select('id', 'keywords', $as("email", "xx"))
+      .select('id', 'keywords', $as("area", "xx"))
       .order({
          "id": "desc",
          "keywords": "desc"

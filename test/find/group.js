@@ -10,15 +10,15 @@ const { tasks } = model;
 test('find group', async t => {
 
    const result = await tasks
-      .select($sql('count(*)'))
+      .select()
       .where({
          id: $in(1, 34),
-         email: $in(
+         area: $in(
             "Kareem.Kerluke@yahoo.com",
             "Janae.Kiehn95@yahoo.com"
          )
       })
-      .group('email', 'id')
+      .group('area', 'id')
       .order({
          'id': "desc",
          "keywords": "desc"

@@ -8,6 +8,7 @@ const { $as } = Ormv.Op;
 
 const tasksUser = ormv.merge({
    modules: [tasks, user],
+   mode: "INNER JOIN",
    condition: { 'tasks.uid': 'user.id' },
    fields: [
       'tasks.id',

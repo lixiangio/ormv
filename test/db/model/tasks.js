@@ -2,7 +2,7 @@
 
 const { Ormv, ormv } = require('../connect.js');
 
-const { string, email, integer, object, array, boolean } = Ormv.Type;
+const { string, integer, object, array, boolean } = Ormv.Type;
 
 const tasks = ormv.define('tasks', {
    'id': {

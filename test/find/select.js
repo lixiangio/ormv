@@ -4,13 +4,13 @@ const test = require('jtf');
 const typea = require('typea');
 const { Ormv, model } = require('../db/');
 
-const { $sql, $in, $as } = Ormv.Op;
+const { $as } = Ormv.Op;
 const { tasks } = model;
 
 test('select', async t => {
 
    const result = await tasks
-      .select('id', 'keywords', $as("email", "xx"), 'createdAt')
+      .select('id', 'keywords', $as("area", "xx"), 'createdAt')
       .offset(0)
       .limit(3)
       .then(data => {
@@ -38,25 +38,21 @@ test('no select', async t => {
 
    const result = await tasks
       .find()
-      .where({
-         "email": "adb@qq.com"
-      })
+      .where({ "uid": 1 })
       .order({
          "id": "desc",
          "keywords": "desc"
       })
       .catch(error => {
-         console.log(error)
+         console.log(error);
       })
 
-   const { error, data } = typea(result, [{
-      "email": "adb@qq.com"
-   }]);
+   const { error, data } = typea(result, [{ "uid": Number }]);
 
    if (error) {
       throw TypeError(error);
    } else {
-      t.ok(data)
+      t.ok(data);
    }
 
 })

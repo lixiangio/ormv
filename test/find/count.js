@@ -1,7 +1,7 @@
 'use strict';
 
 const test = require('jtf');
-const { Ormv, ormv, model } = require('../db/');
+const { model } = require('../db/');
 
 const { tasks } = model;
 
@@ -20,7 +20,7 @@ test('count', async t => {
 })
 
 
-test('find chain', async t => {
+test('find count', async t => {
 
    const result = await tasks
       .find({ 'id': 50, })

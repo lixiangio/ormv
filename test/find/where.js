@@ -4,60 +4,31 @@ const test = require('jtf');
 const typea = require('typea');
 const { Ormv, model } = require('../db/');
 
-const { $sql, $in, $as } = Ormv.Op;
+const { $in, $as } = Ormv.Op;
 const { tasks } = model;
 
-test('leftJoin', async t => {
-
-   const chan = tasks
-      .select('tasks.id', 'tasks.keywords', $as("user.email", "xx"))
-      .leftJoin("user")
-      .on({ 'tasks.uid': "user.id" })
-      .where({
-         'tasks.id': $in(50, 51),
-         'keywords': {}
-      })
-      .or({ 'tasks.uid': 1 })
-      .and({
-         'tasks.id': 5,
-         "keywords": {}
-      })
-      .or({ 'tasks.id': 5 })
-      .limit(10)
-
-   const result = await chan.then(data => {
-      return data
-   }).catch(error => {
-      console.log(error)
-   })
-
-   t.ok(result)
-
-})
-
-
-test('rightJoin', async t => {
+test('where', async t => {
 
    const result = await tasks
-      .select('tasks.id', 'keywords', $as("tasks.email", "xx"))
+      .select('id', 'keywords', $as("state", "xx"))
       .where(
          {
-            'tasks.id': $in(50, 51),
+            'id': $in(50, 51),
          },
          {
-            'tasks.email': 'abs@xx.cc',
+            'state': true,
             keywords: {}
          }
       )
       .or({
-         'tasks.id': 5,
-         'tasks.email': "adb@qq.com"
+         'id': 5,
+         'state': false,
       })
       .and({
-         'tasks.id': 5,
+         'id': 5,
          "keywords": {}
       })
-      .or({ 'tasks.id': 5 })
+      .or({ 'id': 5 })
       .limit(10)
       .then(data => {
          return data
@@ -66,6 +37,6 @@ test('rightJoin', async t => {
          console.log(error)
       })
 
-   t.ok(result)
+   t.ok(result);
 
 })
