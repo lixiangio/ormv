@@ -28,6 +28,4 @@ const tasksUser = ormv.merge({
    ],
 });
 
-// console.log(tasksUser);
-
 module.exports = tasksUser;
