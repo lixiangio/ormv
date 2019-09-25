@@ -4,7 +4,7 @@ const test = require('jtf');
 const typea = require('typea');
 const { Ormv, model } = require('../db/');
 
-const { $sql, $in, $as } = Ormv.Op;
+const { $in } = Ormv.Op;
 const { tasks } = model;
 
 test('find group', async t => {

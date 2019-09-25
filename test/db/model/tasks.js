@@ -7,7 +7,7 @@ const { string, integer, object, array, boolean } = Ormv.Type;
 const tasks = ormv.define('tasks', {
    'id': {
       "type": integer,
-      "primaryKey": true
+      "primaryKey": true,
    },
    'uid': {
       "type": integer
@@ -38,5 +38,7 @@ const tasks = ormv.define('tasks', {
       'defaultValue': true,
    }
 })
+
+// tasks.sync();
 
 module.exports = tasks;

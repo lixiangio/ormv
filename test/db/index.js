@@ -2,7 +2,7 @@
 
 const user = require('./model/user.js');
 const tasks = require('./model/tasks.js');
-const test = require('./model/test.js');
+const admin = require('./model/admin.js');
 const tasksUser = require('./model/tasksUser.js');
 const error = require('./model/error.js');
 const { Ormv, ormv } = require('./connect.js');
@@ -13,7 +13,7 @@ module.exports = {
    model: {
       tasks,
       user,
-      test,
+      admin,
       error,
       tasksUser,
    },

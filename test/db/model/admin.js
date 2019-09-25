@@ -4,13 +4,14 @@ const { Ormv, ormv } = require('../connect.js');
 
 const { char, email, integer, array, boolean } = Ormv.Type;
 
-const test = ormv.define('test', {
+const admin = ormv.define('admin', {
    'id': {
       type: integer,
-      primaryKey: true,
+      primaryKey: true
    },
    'name': {
       type: char,
+      uniqueIndex: true,
    },
    'address': {
       type: array,
@@ -18,13 +19,14 @@ const test = ormv.define('test', {
    },
    'email': {
       type: email,
+      uniqueIndex: true,
    },
 })
 
-// test.sync('increment');
+// admin.sync();
 
-// test.sync();
+// admin.sync('increment');
 
-// test.sync('rebuild');
+// admin.sync('rebuild');
 
-module.exports = test;
+module.exports = admin;

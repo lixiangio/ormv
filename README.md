@@ -74,7 +74,7 @@ async function main() {
          {
             id: 5,
          },
-         // or
+         // 多个and条件之间为or关系
          {
             keywords: {}
          }
@@ -214,9 +214,7 @@ model.sync('rebuild');
 * options `Object` - and条件集合
 
 ```js
-model.where(options, options, ...);
-
-model.where(options).and(options, options, ...).or(options, options, ...);
+model.where(options, ...).or(options, ...).and(options, ...);
 ```
 
 <!-- ### 事务 -->

@@ -21,8 +21,8 @@ test('sql', async t => {
    ]
 
    const result1 = await ormv.query(sql, value).catch(error => {
-      let { message } = error
-      console.log(error)
+      const { message } = error
+      console.log(error);
       return {
          code: 1000,
          message
@@ -30,8 +30,6 @@ test('sql', async t => {
    })
 
    t.ok(result1);
-
-   console.log(result1);
 
    // const result2 = await client.query(`SELECT * FROM "tasks" WHERE id = 4 LIMIT 1`).catch(error => {
    //    let { message } = error

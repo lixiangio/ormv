@@ -1,10 +1,8 @@
 'use strict';
 
-const { Ormv, ormv } = require('../connect.js');
+const { ormv } = require('../connect.js');
 const tasks = require('./tasks.js');
 const user = require('./user.js');
-
-const { $as } = Ormv.Op;
 
 const tasksUser = ormv.merge({
    modules: [tasks, user],
@@ -23,8 +21,8 @@ const tasksUser = ormv.merge({
       'user.image',
       'user.phone',
       'user.email',
-      $as('user.age', 'xxx'),
-      $as('user.age', 'ggr'),
+      'user.age as xxx',
+      'user.age as ggr'
    ],
 });
 

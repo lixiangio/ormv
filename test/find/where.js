@@ -4,7 +4,7 @@ const test = require('jtf');
 const typea = require('typea');
 const { Ormv, model } = require('../db/');
 
-const { $in, $as } = Ormv.Op;
+const { $in, $as, $scope } = Ormv.Op;
 const { tasks } = model;
 
 test('where', async t => {
@@ -13,6 +13,10 @@ test('where', async t => {
       .select('id', 'keywords', $as("state", "xx"))
       .where(
          {
+            'state': true,
+            keywords: {}
+         },
+         {
             'id': $in(50, 51),
          },
          {
@@ -20,6 +24,36 @@ test('where', async t => {
             keywords: {}
          }
       )
+      .limit(10)
+      .then(data => {
+         return data;
+      })
+      .catch(error => {
+         console.log(error);
+      })
+
+   const { error, data } = typea(result, [{
+      id: Number,
+      keywords: Object,
+      xx: String,
+   }])
+
+   if (error) {
+      throw TypeError(error);
+   } else {
+      t.ok(data);
+   }
+
+})
+
+test('where', async t => {
+
+   const result = await tasks
+      .select('id', 'keywords', $as("state", "xx"))
+      .where({
+         'state': true,
+         keywords: {}
+      })
       .or({
          'id': 5,
          'state': false,
@@ -31,12 +65,57 @@ test('where', async t => {
       .or({ 'id': 5 })
       .limit(10)
       .then(data => {
-         return data
+         return data;
       })
       .catch(error => {
-         console.log(error)
+         console.log(error);
       })
 
-   t.ok(result);
+   const { error, data } = typea(result, [{
+      id: Number,
+      keywords: Object,
+      xx: String,
+   }])
+
+   if (error) {
+      throw TypeError(error);
+   } else {
+      t.ok(data);
+   }
+
+})
+
+test('where $scope', async t => {
+
+   const result = await tasks
+      .select('id', 'keywords', $as("state", "xx"))
+      .where({
+         'id': $scope(1, 100),
+         'state': true,
+         keywords: {}
+      })
+      .or({
+         'id': 5,
+         'state': false,
+      })
+      .limit(10)
+      .then(data => {
+         return data;
+      })
+      .catch(error => {
+         console.log(error);
+      })
+
+   const { error, data } = typea(result, [{
+      id: Number,
+      keywords: Object,
+      xx: String,
+   }])
+
+   if (error) {
+      throw TypeError(error);
+   } else {
+      t.ok(data);
+   }
 
 })
