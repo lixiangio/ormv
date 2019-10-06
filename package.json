@@ -1,11 +1,11 @@
 {
   "name": "ormv",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Postgresql ORM，为简化JSON操作定制",
   "main": "lib/index.js",
   "dependencies": {
     "dayjs": "^1.8.14",
-    "pg": "^7.11.0",
+    "pg": "^7.12.1",
     "typea": "^4.4.5"
   },
   "devDependencies": {},

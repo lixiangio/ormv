@@ -29,13 +29,11 @@ async function main() {
 
    // 数据库参数配置
    const client = new Ormv({
-      db: {
-         host: 'localhost',
-         database: 'test',
-         username: 'postgres',
-         password: 'postgres',
-         port: 5432,
-      },
+      host: 'localhost',
+      database: 'test',
+      username: 'postgres',
+      password: 'postgres',
+      port: 5432,
       logger: true, // 显示合成sql
    });
 
