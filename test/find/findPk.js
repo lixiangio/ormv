@@ -4,6 +4,11 @@ const test = require('jtf');
 const typea = require('typea');
 const { Ormv, model } = require('../db/');
 
+const schema = typea({
+   id: Number,
+   keywords: Object,
+})
+
 const { tasks } = model;
 
 test('findPk ', async t => {
@@ -19,15 +24,12 @@ test('findPk ', async t => {
          }
       })
 
-   const { error, data } = typea(result, {
-      id: Number,
-      keywords: Object,
-   })
+   const { error, data } = schema.strictVerify(result)
 
    if (error) {
       throw TypeError(error);
    } else {
-      t.ok(data)
+      t.ok(data);
    }
 
 })

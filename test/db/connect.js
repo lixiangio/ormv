@@ -5,13 +5,19 @@ const Ormv = require('../../lib/');
 const ormv = new Ormv({
    host: 'localhost',
    database: 'test',
-   username: 'xiangla',
-   password: '*ns99*621',
-   port: 5432,
+   username: 'postgres',
+   password: 'M2Idiftre&34FS',
+   port: 5532,
    logger: true,
 });
 
-ormv.connect();
+ormv.connect(error => {
+   if (error) {
+      console.log('pgsql ', error.stack);
+   } else {
+      console.error('pgsql connect success');
+   }
+});
 
 module.exports = {
    Ormv,

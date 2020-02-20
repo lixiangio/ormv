@@ -28,6 +28,6 @@ test('insert', async t => {
 
    t.ok(result);
    
-   console.log(result);
+   // console.log(result);
 
 })

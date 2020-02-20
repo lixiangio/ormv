@@ -8,15 +8,13 @@ const { tasks } = model;
 
 test('updateMerge', async t => {
 
-   const update = {
-      "keywords": {
-         "area": "5'68",
-         "state": false
-      }
-   }
-
    const result = await tasks
-      .updateMerge(update)
+      .updateMerge({
+         "keywords": {
+            "area": "5'68",
+            "state": false
+         }
+      })
       .where({ id: 90 })
       .catch(error => {
          return {
@@ -49,21 +47,23 @@ test('updateMerge return()', async t => {
          }
       })
 
-      const { error, data } = typea(result, {
-         id: Number,
-         keywords: Object,
-         email: String,
-         area: String,
-         state: Boolean,
-         createdAt: Date,
-         updatedAt: Date,
-         list: Array
-      })
-   
-      if (error) {
-         throw TypeError(error);
-      } else {
-         t.ok(data)
-      }
+   const types = typea({
+      id: Number,
+      keywords: Object,
+      email: String,
+      area: String,
+      state: Boolean,
+      createdAt: Date,
+      updatedAt: Date,
+      list: Array
+   });
+
+   const { error, data } = types.looseVerify(result);
+
+   if (error) {
+      throw TypeError(error);
+   } else {
+      t.ok(data)
+   }
 
 })

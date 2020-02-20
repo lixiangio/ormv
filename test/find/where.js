@@ -32,11 +32,13 @@ test('where', async t => {
          console.log(error);
       })
 
-   const { error, data } = typea(result, [{
+   const schema = typea([{
       id: Number,
       keywords: Object,
       xx: String,
-   }])
+   }]);
+
+   const { error, data } = schema.looseVerify(result);
 
    if (error) {
       throw TypeError(error);
@@ -71,11 +73,13 @@ test('where', async t => {
          console.log(error);
       })
 
-   const { error, data } = typea(result, [{
+   const schema = typea([{
       id: Number,
       keywords: Object,
       xx: String,
-   }])
+   }]);
+
+   const { error, data } = schema.looseVerify(result);
 
    if (error) {
       throw TypeError(error);
@@ -106,11 +110,13 @@ test('where $scope', async t => {
          console.log(error);
       })
 
-   const { error, data } = typea(result, [{
+   const schema = typea([{
       id: Number,
       keywords: Object,
       xx: String,
-   }])
+   }]);
+
+   const { error, data } = schema.looseVerify(result);
 
    if (error) {
       throw TypeError(error);

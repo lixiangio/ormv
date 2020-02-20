@@ -15,8 +15,6 @@ test('count', async t => {
 
    t.ok(result);
 
-   console.log(result);
-
 })
 
 
@@ -34,7 +32,5 @@ test('find count', async t => {
       })
 
    t.ok(result);
-
-   console.log(result);
 
 })

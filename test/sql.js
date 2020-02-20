@@ -29,7 +29,7 @@ test('sql', async t => {
       }
    })
 
-   t.ok(result1);
+   t.ok(!result1.code, result1.message);
 
    // const result2 = await client.query(`SELECT * FROM "tasks" WHERE id = 4 LIMIT 1`).catch(error => {
    //    let { message } = error

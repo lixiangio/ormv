@@ -7,7 +7,7 @@ const { Ormv, model } = require('../db/');
 const { $sql } = Ormv.Op;
 const { tasks } = model;
 
-test('findOne ', async t => {
+test('sql', async t => {
 
    const result = await tasks
       .findOne({ id: $sql(`in('188', '120', '170')`) })
@@ -15,7 +15,7 @@ test('findOne ', async t => {
          console.log(error)
       })
 
-   const { error, data } = typea(result, {
+   const schema = typea({
       id: Number,
       keywords: Object,
       email: String,
@@ -25,6 +25,8 @@ test('findOne ', async t => {
       updatedAt: Date,
       list: Array
    })
+
+   const { error, data } = schema.looseVerify(result);
 
    if (error) {
       throw TypeError(error);

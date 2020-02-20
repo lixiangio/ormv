@@ -4,6 +4,17 @@ const test = require('jtf');
 const typea = require('typea');
 const { Ormv, model } = require('../db/');
 
+const schema = typea({
+   id: Number,
+   keywords: Object,
+   email: String,
+   area: String,
+   state: Boolean,
+   createdAt: Date,
+   updatedAt: Date,
+   list: Array
+})
+
 const { tasks } = model;
 
 test('findOne ', async t => {
@@ -18,16 +29,7 @@ test('findOne ', async t => {
          console.log(error)
       })
 
-   const { error, data } = typea(result, {
-      id: Number,
-      keywords: Object,
-      email: String,
-      area: String,
-      state: Boolean,
-      createdAt: Date,
-      updatedAt: Date,
-      list: Array
-   })
+   const { error, data } = schema.looseVerify(result);
 
    if (error) {
       throw TypeError(error);

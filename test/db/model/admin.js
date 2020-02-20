@@ -4,7 +4,7 @@ const { Ormv, ormv } = require('../connect.js');
 
 const { char, email, integer, array, boolean } = Ormv.Type;
 
-const admin = ormv.define('admin', {
+const admin = ormv.model('admin', {
    'id': {
       type: integer,
       primaryKey: true

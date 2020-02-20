@@ -25,11 +25,13 @@ test('find', async t => {
 
    // console.log(result);
 
-   const { error, data } = typea(result, [{
+   const schema = typea([{
       id: Number,
       keywords: Object,
       xx: String,
    }])
+
+   const { error, data } = schema.looseVerify(result);
 
    if (error) {
       throw TypeError(error);
@@ -71,13 +73,15 @@ test('select', async t => {
          console.log(error)
       })
 
-   console.log(result);
+   // console.log(result);
 
-   const { error, data } = typea(result, [{
+   const schema = typea([{
       id: Number,
       keywords: Object,
       xx: String,
-   }])
+   }]);
+
+   const { error, data } = schema.looseVerify(result);
 
    if (error) {
       throw TypeError(error);
@@ -105,11 +109,13 @@ test('order offset limit', async t => {
          console.log(error)
       })
 
-   const { error, data } = typea(result, [{
+   const schema = typea([{
       id: Number,
       keywords: Object,
       xx: String,
-   }])
+   }]);
+
+   const { error, data } = schema.looseVerify(result);
 
    if (error) {
       throw TypeError(error);
@@ -134,9 +140,11 @@ test('no select', async t => {
          console.log(error)
       })
 
-   const { error, data } = typea(result, [{
+   const schema = typea([{
       "email": "adb@qq.com"
    }]);
+
+   const { error, data } = schema.strictVerify(result);
 
    if (error) {
       throw TypeError(error);

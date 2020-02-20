@@ -20,11 +20,13 @@ test('select', async t => {
          console.log(error)
       })
 
-   const { error, data } = typea(result, [{
+   const schema = typea([{
       id: Number,
       keywords: Object,
       xx: String,
    }])
+
+   const { error, data } = schema.looseVerify(result)
 
    if (error) {
       throw TypeError(error);
@@ -33,6 +35,7 @@ test('select', async t => {
    }
 
 })
+
 
 test('no select', async t => {
 
@@ -47,7 +50,9 @@ test('no select', async t => {
          console.log(error);
       })
 
-   const { error, data } = typea(result, [{ "uid": Number }]);
+   const schema = typea([{ "uid": Number }])
+
+   const { error, data } = schema.strictVerify(result);
 
    if (error) {
       throw TypeError(error);
