@@ -26,7 +26,7 @@ const tasks = ormv.model('tasks', {
       {
         'state': {
           "type": Boolean,
-          "defaultValue": false,
+          "default": false,
         }
       }
     ]
@@ -37,7 +37,7 @@ const tasks = ormv.model('tasks', {
   },
   'state': {
     'type': boolean,
-    'defaultValue': true,
+    'default': true,
   }
 })
 

@@ -15,7 +15,7 @@ const admin = ormv.model('admin', {
    },
    'address': {
       type: array,
-      defaultValue: [],
+      default: [],
    },
    'email': {
       type: email,

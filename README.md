@@ -157,7 +157,7 @@ model.sync('rebuild');
 
 查询单条记录
 
-#### model.findPK(id)
+#### model.findPk(id)
 
 * id `Number` - 主键id
 
@@ -189,7 +189,7 @@ model.sync('rebuild');
 
 更新数据，用合并的方式更新json、jsonb类型
 
-#### model.updatePK(id, data)
+#### model.updatePk(id, data)
 
 更新指定主键的数据
 
@@ -199,7 +199,7 @@ model.sync('rebuild');
 
 删除多条数据
 
-#### model.deletePK(id)
+#### model.deletePk(id)
 
 删除指定主键的数据
 
