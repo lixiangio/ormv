@@ -13,21 +13,11 @@ const model = ormv.model('user', {
       type: string,
       allowNull: false,
    },
-   'age': {
-      type: integer
-   },
-   'image': {
-      type: string
-   },
-   'phone': {
-      type: string
-   },
-   'password': {
-      type: string
-   },
-   'email': {
-      type: string
-   }
+   'age': integer,
+   'image': string,
+   'phone': string,
+   'password': string,
+   'email': string
 });
 
 // model.sync();

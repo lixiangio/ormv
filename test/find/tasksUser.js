@@ -129,9 +129,7 @@ test('no select', async t => {
 
    const result = await tasksUser
       .find()
-      .where({
-         "email": "adb@qq.com"
-      })
+      .where({ "email": "adb@qq.com" })
       .order({
          "id": "desc",
          "keywords": "desc"

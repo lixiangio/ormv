@@ -9,12 +9,10 @@ const tasks = ormv.model('tasks', {
     "type": integer,
     "primaryKey": true,
   },
-  'uid': {
-    "type": integer
-  },
+  'uid': integer,
   'keywords': {
     "type": object,
-    "validate": {
+    "schema": {
       "area": {
         "type": String,
       },
@@ -22,14 +20,12 @@ const tasks = ormv.model('tasks', {
   },
   'list': {
     'type': array,
-    'validate': [
-      {
-        'state': {
-          "type": Boolean,
-          "default": false,
-        }
+    'schema': [{
+      'state': {
+        "type": Boolean,
+        "default": false,
       }
-    ]
+    }]
   },
   "area": {
     'type': string,

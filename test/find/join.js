@@ -23,7 +23,7 @@ test('inner join', async t => {
    const result = await tasksUser
       .select('id', 'keywords', $as("email", "xx"))
       .where({
-         'id': $in(50, 51),
+         id: $in(50, 51),
          keywords: {}
       })
       .or({ 
