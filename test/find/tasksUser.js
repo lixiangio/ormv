@@ -11,6 +11,7 @@ test('find', async t => {
 
    const result = await tasksUser
       .find()
+      .schema("public")
       .where({
          'id': $in(50, 51),
          'keywords': {}

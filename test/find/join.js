@@ -13,7 +13,7 @@ const schema = typea([{
    createdAt: Date,
    updatedAt: Date,
    list: Array
-}])
+}]);
 
 const { $in, $as } = Ormv.Op;
 const { tasksUser } = model;
@@ -22,6 +22,7 @@ test('inner join', async t => {
 
    const result = await tasksUser
       .select('id', 'keywords', $as("email", "xx"))
+      .schema("public")
       .where({
          id: $in(50, 51),
          keywords: {}
@@ -43,7 +44,7 @@ test('inner join', async t => {
          console.log(error)
       })
 
-      const { error, data } = schema.looseVerify(result)
+      const { error, data } = schema.looseVerify(result);
    
       if (error) {
          throw TypeError(error);
