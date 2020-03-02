@@ -2,7 +2,7 @@
 
 const { Ormv, ormv } = require('../connect.js');
 
-const { string, integer, object, array, boolean } = Ormv.Type;
+const { string, integer, boolean, timestamp } = Ormv.Type;
 
 const tasks = ormv.model('tasks', {
   'id': {
@@ -11,22 +11,17 @@ const tasks = ormv.model('tasks', {
   },
   'uid': integer,
   'keywords': {
-    "type": object,
-    "schema": {
-      "area": {
-        "type": String,
-      },
-    }
+    "area": string,
+    "createdAt": timestamp,
   },
-  'list': {
-    'type': array,
-    'schema': [{
+  'list': [
+    {
       'state': {
-        "type": Boolean,
+        "type": boolean,
         "default": false,
       }
-    }]
-  },
+    }
+  ],
   "area": {
     'type': string,
     'allowNull': true,

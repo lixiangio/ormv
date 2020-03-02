@@ -62,8 +62,6 @@ async function main() {
    // 基于数据模型的结构化查询
    const result = await tasks
       .select('id', 'keywords', $as("platform", "xx"))
-      .leftJoin("users")
-      .on({ 'tasks.id': 'users.uid' })
       .where({
          id: $in(50, 51),
          keywords: {}
@@ -79,8 +77,8 @@ async function main() {
       )
       .or({ id: 5 })
       .order({
-         "tasks.id": "desc",
-         "tasks.keywords": "desc"
+         "id": "desc",
+         "keywords": "desc"
       })
       .limit(10)
 

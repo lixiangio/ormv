@@ -30,6 +30,23 @@ test('update', async t => {
          }
       })
 
+   const item = {
+      "id": 1,
+      "user": "lixiang"
+   }
+
+   const result = await tasks
+      .updateJson("list", item)
+      .where({ "id": 1 })
+      .or({ "area": "11" })
+      .catch(error => {
+         console.log(error);
+         return {
+            code: 1000,
+            message: String(error)
+         }
+      })
+
    t.ok(result);
 
    t.ok(result.code === undefined, result.message);
