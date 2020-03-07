@@ -10,9 +10,8 @@ const { tasksUser } = model;
 test('find', async t => {
 
    const result = await tasksUser
-      .find()
-      .schema("public")
-      .where({
+      .schema("sz")
+      .find({
          'id': $in(50, 51),
          'keywords': {}
       })
@@ -37,7 +36,7 @@ test('find', async t => {
    if (error) {
       throw TypeError(error);
    } else {
-      t.ok(data)
+      t.ok(data);
    }
 
 })

@@ -1,23 +1,21 @@
 'use strict';
 
-const { Ormv, ormv } = require('../connect.js');
-
-const { string, integer } = Ormv.Type;
+const { ormv } = require('../connect.js');
 
 const model = ormv.model('user', {
    'id': {
-      type: integer,
+      type: 'integer',
       primaryKey: true,
    },
    'name': {
-      type: string,
+      type: 'string',
       allowNull: false,
    },
-   'age': integer,
-   'image': string,
-   'phone': string,
-   'password': string,
-   'email': string
+   'age': 'integer',
+   'image': 'string',
+   'phone': 'string',
+   'password': 'string',
+   'email': 'string'
 });
 
 // model.sync();

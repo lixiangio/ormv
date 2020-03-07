@@ -14,8 +14,8 @@ const { tasks } = model;
 test('findPk ', async t => {
 
    const result = await tasks
-      .findPk(89)
       .schema("public")
+      .findPk(89)
       .select('id', 'keywords')
       .catch(error => {
          const { message } = error;

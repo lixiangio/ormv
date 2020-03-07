@@ -1,24 +1,22 @@
 'use strict';
 
-const { Ormv, ormv } = require('../connect.js');
-
-const { char, email, integer, array, boolean } = Ormv.Type;
+const { ormv } = require('../connect.js');
 
 const admin = ormv.model('admin', {
    'id': {
-      type: integer,
+      type: 'integer',
       primaryKey: true
    },
    'name': {
-      type: char,
+      type: 'char',
       uniqueIndex: true,
    },
    'address': {
-      type: array,
+      type: 'array',
       default: [],
    },
    'email': {
-      type: email,
+      type: 'email',
       uniqueIndex: true,
    },
 })

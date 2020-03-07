@@ -31,7 +31,7 @@ test('sql', async t => {
    if (error) {
       throw TypeError(error);
    } else {
-      t.ok(data)
+      t.ok(data);
    }
 
 })

@@ -3,14 +3,13 @@
 const test = require('jtf');
 const { Ormv, model } = require('../db/');
 
-const { $insert } = Ormv.Op;
+const { $insert, $sql } = Ormv.Op;
 const { tasks } = model;
 
 test('update $insert', async t => {
-
    const result = await tasks
       .update({
-         "updatedAt": '2019-05-08T19:59:01+08:00',
+         "area": '555',
          "list": $insert('list', "{0}", { "state": true })
       })
       .where({ id: 4 })

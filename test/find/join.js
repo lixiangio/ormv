@@ -21,14 +21,14 @@ const { tasksUser } = model;
 test('inner join', async t => {
 
    const result = await tasksUser
-      .select('id', 'keywords', $as("email", "xx"))
       .schema("public")
+      .select('id', 'keywords', $as("email", "xx"))
       .where({
          id: $in(50, 51),
          keywords: {}
       })
-      .or({ 
-         'id': 5 ,
+      .or({
+         'id': 5,
          'email': "adb@qq.com"
       })
       .and({
@@ -44,12 +44,12 @@ test('inner join', async t => {
          console.log(error)
       })
 
-      const { error, data } = schema.looseVerify(result);
-   
-      if (error) {
-         throw TypeError(error);
-      } else {
-         t.ok(data)
-      }
+   const { error, data } = schema.looseVerify(result);
+
+   if (error) {
+      throw TypeError(error);
+   } else {
+      t.ok(data)
+   }
 
 })

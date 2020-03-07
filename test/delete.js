@@ -13,8 +13,6 @@ test('deletePk', async t => {
          console.log(error)
       })
 
-   console.log(result);
-
    t.deepEqual(result, { rowCount: 0 });
 
 })
@@ -27,8 +25,6 @@ test('destroy', async t => {
       .catch(error => {
          console.log(error)
       })
-
-   console.log(result);
 
    t.deepEqual(result, { rowCount: 0 });
 

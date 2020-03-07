@@ -1,33 +1,30 @@
 'use strict';
 
-const { Ormv, ormv } = require('../connect.js');
-
-const { string, integer, boolean, timestamp } = Ormv.Type;
+const { ormv } = require('../connect.js');
 
 const tasks = ormv.model('tasks', {
   'id': {
-    "type": integer,
+    "type": 'integer',
     "primaryKey": true,
   },
-  'uid': integer,
+  'uid': 'integer',
   'keywords': {
-    "area": string,
-    "createdAt": timestamp,
+    'area': 'string',
+    "createdAt": 'timestamp',
   },
   'list': [
     {
-      'state': {
-        "type": boolean,
-        "default": false,
-      }
+      'state': 'boolean',
+      'address': [
+        {
+          name: 'string'
+        }
+      ]
     }
   ],
-  "area": {
-    'type': string,
-    'allowNull': true,
-  },
+  "area": 'string',
   'state': {
-    'type': boolean,
+    'type': 'boolean',
     'default': true,
   }
 })

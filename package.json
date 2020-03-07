@@ -4,7 +4,6 @@
   "description": "Postgresql ORM，为简化JSON操作定制",
   "main": "lib/index.js",
   "dependencies": {
-    "dayjs": "^1.8.14",
     "pg": "^7.12.1",
     "validator": "^12.2.0"
   },
