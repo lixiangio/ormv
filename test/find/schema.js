@@ -18,8 +18,7 @@ test('schema ', async t => {
   )
 
   const result = await tasks
-    .schema("public")
-    .find()
+    .schema("bj")
     .select('id', 'keywords')
     .limit(3)
     .catch(error => {
