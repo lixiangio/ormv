@@ -1,7 +1,7 @@
 'use strict';
 
 const test = require('jtf');
-const { model } = require('../db/');
+const { model } = require('../../model/');
 
 const { tasks } = model;
 

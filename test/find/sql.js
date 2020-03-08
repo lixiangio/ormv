@@ -2,7 +2,7 @@
 
 const test = require('jtf');
 const typea = require('typea');
-const { Ormv, model } = require('../db/');
+const { Ormv, model } = require('../../model/');
 
 const { $sql } = Ormv.Op;
 const { tasks } = model;

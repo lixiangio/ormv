@@ -1,6 +1,6 @@
 'use strict';
 
-const Ormv = require('../../lib/');
+const Ormv = require('../lib/index.js');
 
 const ormv = new Ormv({
    host: 'localhost',
@@ -19,7 +19,17 @@ ormv.connect(error => {
    }
 });
 
-module.exports = {
-   Ormv,
-   ormv,
-};
+exports.Ormv = Ormv;
+exports.ormv = ormv;
+
+const user = require('./user.js');
+const tasks = require('./tasks.js');
+const admin = require('./admin.js');
+const tasksUser = require('./tasksUser.js');
+
+exports.model = {
+   tasks,
+   user,
+   admin,
+   tasksUser,
+}

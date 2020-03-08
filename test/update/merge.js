@@ -1,7 +1,7 @@
 'use strict';
 
 const test = require('jtf');
-const { Ormv, model } = require('../db/');
+const { Ormv, model } = require('../../model/');
 
 const { $merge } = Ormv.Op;
 const { tasks } = model;

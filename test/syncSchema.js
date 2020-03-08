@@ -1,5 +1,5 @@
 'use strict';
 
-const { ormv } = require('./db/');
+const { ormv } = require('../model/');
 
 // ormv.sync(null, 'tj');

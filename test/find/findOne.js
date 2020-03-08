@@ -2,7 +2,7 @@
 
 const test = require('jtf');
 const typea = require('typea');
-const { model } = require('../db/');
+const { model } = require('../../model/');
 
 const schema = typea({
    id: Number,

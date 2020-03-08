@@ -1,6 +1,6 @@
 'use strict';
 
-const { ormv } = require('../connect.js');
+const { ormv } = require('./index.js');
 
 const model = ormv.model('user', {
    'id': {
