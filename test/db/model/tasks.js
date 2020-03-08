@@ -14,19 +14,40 @@ const tasks = ormv.model('tasks', {
   },
   'list': [
     {
+      'id': {
+        type: 'integer',
+        default: `nextval('tasks_id_seq')`,
+      },
       'state': 'boolean',
       'address': [
         {
           name: 'string'
         }
-      ]
+      ],
+      'test': 'object',
+      'createdAt': {
+        type: 'timestamp',
+        default: 'now()',
+      },
+      'updatedAt': {
+        type: 'timestamp',
+        default: 'now()',
+      },
     }
   ],
   "area": 'string',
   'state': {
     'type': 'boolean',
     'default': true,
-  }
+  },
+  "createdAt": {
+    type: 'timestamp',
+    default: 'now()',
+  },
+  "updatedAt": {
+    type: 'timestamp',
+    default: 'now()',
+  },
 })
 
 // tasks.sync();

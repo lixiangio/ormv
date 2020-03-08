@@ -25,6 +25,18 @@ test('update', async t => {
             name: '666'
           }
         ]
+      },
+      {
+        'id': 6,
+        'state': true,
+        'address': [
+          {
+            name: 'xx123'
+          },
+          {
+            name: '666'
+          }
+        ]
       }
     ],
     area: null,

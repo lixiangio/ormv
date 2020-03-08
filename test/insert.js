@@ -26,7 +26,11 @@ test('insert', async t => {
               name: "pppp",
               admin: "666"
             }
-          ]
+          ],
+          'test': {
+            a: 1,
+            b: 2
+          },
         },
         {
           'state': false,
@@ -40,7 +44,8 @@ test('insert', async t => {
             },
           ]
         }
-      ]
+      ],
+      state: false
     })
     .catch(error => {
 
