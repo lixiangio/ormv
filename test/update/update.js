@@ -47,6 +47,7 @@ test('update', async t => {
     .update(update)
     .where({ "id": $in(6, 8, 9) })
     .or({ "area": "11" })
+    .return()
     .catch(error => {
       return {
         code: 1000,
@@ -54,8 +55,6 @@ test('update', async t => {
       }
     })
 
-  t.ok(result);
-
-  t.ok(result.code === undefined, result.message);
+  t.ok(result.id, result.message);
 
 })
