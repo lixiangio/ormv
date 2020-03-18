@@ -16,12 +16,24 @@ const tasks = ormv.model('tasks', {
     {
       'id': {
         type: 'integer',
-        default: `nextval('tasks_id_seq')`,
+        autoIncrement: true,
       },
       'state': 'boolean',
       'address': [
         {
-          name: 'string'
+          'id': {
+            type: 'integer',
+            autoIncrement: true,
+          },
+          name: 'string',
+          'createdAt': {
+            type: 'timestamp',
+            default: 'now()',
+          },
+          'updatedAt': {
+            type: 'timestamp',
+            default: 'now()',
+          },
         }
       ],
       'test': 'object',
