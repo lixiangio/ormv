@@ -1,6 +1,6 @@
 {
   "name": "ormv",
-  "version": "2.1.0",
+  "version": "2.1.3",
   "description": "Postgresql ORM，为简化JSON操作定制",
   "main": "lib/index.js",
   "dependencies": {
