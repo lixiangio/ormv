@@ -9,12 +9,15 @@ const admin = ormv.model('admin', {
    },
    'name': {
       type: 'char',
+      comment: "名称",
       uniqueIndex: true,
    },
-   'address': {
-      type: 'array',
-      default: [],
-   },
+   'address': [
+      {
+         type: 'array',
+         comment: "地址"
+      }
+   ],
    'email': {
       type: 'email',
       uniqueIndex: true,

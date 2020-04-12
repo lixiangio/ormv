@@ -24,6 +24,8 @@ test('find group', async t => {
          "keywords": "desc"
       })
 
+      console.log(result)
+
    t.ok(result);
 
 })

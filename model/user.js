@@ -7,6 +7,10 @@ const model = ormv.model('user', {
       type: 'integer',
       primaryKey: true,
    },
+   'type': {
+      type: 'string',
+      allowNull: false,
+   },
    'name': {
       type: 'string',
       allowNull: false,
