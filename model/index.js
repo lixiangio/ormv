@@ -9,6 +9,7 @@ const ormv = new Ormv({
    password: 'M2Idiftre&34FS',
    port: 5532,
    logger: true,
+   sync: true
 });
 
 ormv.connect(error => {
