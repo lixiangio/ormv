@@ -24,10 +24,4 @@ const admin = ormv.model('admin', {
    },
 })
 
-// admin.sync();
-
-// admin.sync('increment');
-
-// admin.sync('rebuild');
-
 module.exports = admin;

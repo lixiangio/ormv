@@ -7,6 +7,7 @@ const { $insert, $sql } = Ormv.Op;
 const { tasks } = model;
 
 test('update $insert', async t => {
+   
    const result = await tasks
       .update({
          "area": '555',

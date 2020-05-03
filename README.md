@@ -104,7 +104,7 @@ async function main() {
 > 无参数时会尝试创建新的数据表，当指定的表已存在时请求被拒绝，不做任何操作。
 
 ```js
-model.sync();
+ormv.sync('public.user');
 ```
 
 ### 增量模式
@@ -112,7 +112,7 @@ model.sync();
 > 在已有表上新增字段，该模式只会添加新的列，不改变已有列和数据。
 
 ```js
-model.sync('increment');
+ormv.sync('user', 'increment');
 ```
 
 ### 重置模式（危险）
@@ -120,7 +120,13 @@ model.sync('increment');
 > 删除已有的数据表重新构建表结构。
 
 ```js
-model.sync('rebuild');
+ormv.sync('user', 'rebuild');
+```
+
+### 批量同步所有模型
+
+```js
+ormv.syncAll('public');
 ```
 
 ## 函数链

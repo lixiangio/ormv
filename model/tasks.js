@@ -62,6 +62,4 @@ const tasks = ormv.model('tasks', {
   },
 })
 
-// tasks.sync();
-
 module.exports = tasks;

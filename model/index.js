@@ -27,10 +27,12 @@ const user = require('./user.js');
 const tasks = require('./tasks.js');
 const admin = require('./admin.js');
 const tasksUser = require('./tasksUser.js');
+const vTasks = require('./vTasks.js');
 
 exports.model = {
    tasks,
    user,
    admin,
    tasksUser,
+   vTasks,
 }

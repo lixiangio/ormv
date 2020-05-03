@@ -1,10 +1,11 @@
 'use strict';
 
 const { ormv } = require('./index.js');
+
 require('./tasks.js');
 require('./user.js');
 
-const tasksUser = ormv.virtual('tasks innerJoin user', {
+const vTasks = ormv.virtual('tasks', {
    id: "tasks",
    uid: "tasks",
    keywords: "tasks",
@@ -13,12 +14,17 @@ const tasksUser = ormv.virtual('tasks innerJoin user', {
    state: "tasks",
    createdAt: "tasks",
    updatedAt: "tasks",
-   name: "user",
-   image: "user",
-   phone: "user",
-   email: "user",
-   xxx: "user.age",
-   ggr: "user.age",
-}, { 'tasks.uid': 'user.id' });
+});
 
-module.exports = tasksUser;
+// const vTasks = ormv.virtual('tasks', [
+//    'id',
+//    'uid',
+//    'keywords',
+//    'list as xx',
+//    'area',
+//    'state',
+//    'createdAt',
+//    'updatedAt'
+// ]);
+
+module.exports = vTasks;

@@ -22,6 +22,4 @@ const model = ormv.model('user', {
    'email': 'string'
 });
 
-// model.sync();
-
 module.exports = model;

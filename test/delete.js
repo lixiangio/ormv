@@ -11,7 +11,7 @@ test('deletePk', async t => {
       .deletePk(3, 5, 9)
       .catch(error => {
          console.log(error)
-      })
+      });
 
    t.deepEqual(result, { rowCount: 0 });
 

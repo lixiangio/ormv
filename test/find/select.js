@@ -12,7 +12,7 @@ test('select', async t => {
 
   const result = await tasks
     .select('id', 'keywords', $as("area", "xx"), 'createdAt')
-    .offset(0)
+    .offset(2)
     .limit(3)
     .catch(error => {
       console.log(error);
@@ -26,11 +26,7 @@ test('select', async t => {
 
   const { error, data } = schema.looseVerify(result);
 
-  if (error) {
-    throw TypeError(error);
-  } else {
-    t.ok(data);
-  }
+  t.ok(data, error);
 
 })
 
@@ -52,10 +48,6 @@ test('no select', async t => {
 
   const { error, data } = schema.strictVerify(result);
 
-  if (error) {
-    throw TypeError(error);
-  } else {
-    t.ok(data);
-  }
+  t.ok(data, error);
 
 })
