@@ -35,7 +35,7 @@ test('insert', async t => {
   const result = await vTasks
     .schema('public')
     .insert({
-      'id': 8,
+      // 'id': 8,
       'name': '小明',
       'age': 10,
       'image': './abc.jpg',
