@@ -2,6 +2,10 @@
 
 const { ormv } = require('../model/');
 
-ormv.syncAll('tj');
+ormv.sync('user', 'increment');
 
-ormv.sync('tj.user');
+ormv.sync('user', 'add');
+
+ormv.sync('user', 'remove');
+
+// ormv.syncs('tj');

@@ -123,10 +123,10 @@ ormv.sync('user', 'increment');
 ormv.sync('user', 'rebuild');
 ```
 
-### 批量同步所有模型
+### 批量同步指定schema中的所有模型
 
 ```js
-ormv.syncAll('public');
+ormv.syncs('public');
 ```
 
 ## 函数链
