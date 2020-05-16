@@ -9,6 +9,7 @@ const tasks = ormv.model('tasks', {
   },
   'uid': 'integer',
   'keywords': {
+    'state': 'boolean',
     'area': 'string',
     "createdAt": 'timestamp',
   },
@@ -16,14 +17,14 @@ const tasks = ormv.model('tasks', {
     {
       'id': {
         type: 'integer',
-        autoIncrement: true,
+        sequence: true,
       },
       'state': 'boolean',
       'address': [
         {
           'id': {
             type: 'integer',
-            autoIncrement: true,
+            sequence: true
           },
           name: 'string',
           'createdAt': {
@@ -52,6 +53,7 @@ const tasks = ormv.model('tasks', {
     'type': 'boolean',
     'default': true,
   },
+  'modes': 'jsonb',
   "createdAt": {
     type: 'timestamp',
     default: 'now()',

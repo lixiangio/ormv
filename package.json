@@ -1,14 +1,14 @@
 {
   "name": "ormv",
-  "version": "2.2.7",
+  "version": "3.0.0",
   "description": "Postgresql ORM，为简化JSON操作定制",
   "main": "lib/index.js",
   "dependencies": {
-    "pg": "^7.12.1",
-    "validator": "^12.2.0"
+    "pg": "^8.2.1",
+    "validator": "^13.0.0"
   },
   "devDependencies": {
-    "typea": "^5.0.4"
+    "typea": "^5.0.5"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

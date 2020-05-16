@@ -4,49 +4,53 @@ const test = require('jtf');
 const { Ormv, model } = require('../model/');
 
 const { $sql } = Ormv.Op;
-const { tasks } = model;
+const { tasks, admin } = model;
 
-test('insert', async t => {
+test('insert tasks', async t => {
 
   const result = await tasks
     .schema('public')
-    .insert({
-      uid: 6,
-      email: 'abs@xx.cc',
-      area: $sql('now()'),
-      keywords: {
-        state: false,
-        area: `k'k'kk"k<script type="text/javascript" src="/app.js"></script>`
-      },
-      list: [
-        {
-          'state': true,
-          'address': [
-            {
-              name: "pppp",
-              admin: "666"
-            }
-          ],
-          'test': {
-            a: 1,
-            b: 2
-          },
+    .insert(
+      {
+        // id: 1,
+        uid: 6,
+        email: 'abs@xx.cc',
+        area: $sql('now()'),
+        keywords: {
+          state: false,
+          area: `k'k'kk"k<script type="text/javascript" src="/app.js"></script>`
         },
-        {
-          'state': false,
-          'address': [
-            {
-              name: "X688df"
+        list: [
+          {
+            'state': true,
+            'address': [
+              {
+                name: 111,
+                admin: "666"
+              }
+            ],
+            'test': {
+              a: 1,
+              b: 2
             },
-            {
-              name: "pppp",
-              admin: 888
-            },
-          ]
-        }
-      ],
-      state: false
-    })
+          },
+          {
+            'state': false,
+            'address': [
+              {
+                name: "X688df"
+              },
+              {
+                name: "pppp",
+                admin: 888
+              },
+            ]
+          }
+        ],
+        state: false
+      },
+      // { update: true }
+    )
     .catch(error => {
 
       return {
