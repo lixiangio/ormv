@@ -44,7 +44,7 @@ async function main() {
    const { char, email, integer, json, boolean } = Ormv.Type;
 
    // 数据表建模
-   const tasks = client.define('tasks', {
+   const tasks = client.model('tasks', {
       'id': {
          "type": 'integer',
          "primaryKey": true,
@@ -138,7 +138,7 @@ async function main() {
 ## 定义模型
 
 ```js
-   const model = client.define(name, options)
+   const model = client.model(name, options)
 ```
 
 * name `String` - 模型名称

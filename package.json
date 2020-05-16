@@ -17,5 +17,17 @@
     "lib"
   ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiangle/ormv.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xiangle/ormv/issues"
+  },
+  "homepage": "https://github.com/xiangle/ormv#readme"
 }
