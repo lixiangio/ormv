@@ -6,15 +6,19 @@ Postgresql ORM模型
 
 * 使用函数链风格的查询表达式，简约、直观、易于读写
 
+* 支持JSON类型字段建模，提供强大的JSON校验与合成功能
+
+* 支持为JSON数组、对象创建独立的自增序列
+
+* 支持多租户跨schema的数据模型同步与CRUD操作
+
+* 支持扩展自定义的运算符函数
+
 * 依然保留了类似SQL的语法特征，降低学习成本
-
-* 支持JSON类型字段建模，提供强大的嵌套数据校验功能
-
-* 支持扩展自定义的运算符函数，对于定制化需求非常有用
 
 ## 感悟
 
-受SQL语言兼容性、灵活性、复杂性等因素的影响，现有ORM很难优雅的实现原生SQL的所有功能，在针对某些复杂或边缘化的查询用例时显得非常鸡肋，可读性很差且性能低下。因此，ormv不再追求大而全，未来的目标将专注于优化常见的高频查询用例，期望在性能和开发体验之间找到最佳平衡点，对于复杂用例应该优先考虑原生sql拼接。
+受SQL语言兼容性、灵活性、复杂性等因素的影响，现有ORM很难优雅的实现SQL的所有功能，在针对某些复杂或边缘化的查询用例时显得非常鸡肋，可读性很差且性能低下。因此，ormv不再追求大而全，未来的目标将专注于优化常见的高频查询用例，期望在性能和开发体验之间找到最佳平衡点，对于复杂用例应该优先考虑原生sql拼接。
 
 ## Install
 
@@ -34,14 +38,12 @@ async function main() {
       username: 'postgres',
       password: 'postgres',
       port: 5432,
-      logger: true, // 显示合成sql
+      logger: true, // 显示sql
    });
 
    await client.connect(); // 连接数据库
 
-   await client.query(`sql ...`); // 原生sql查询，支持参数化查询
-
-   const { char, email, integer, json, boolean } = Ormv.Type;
+   await client.query(`sql ...`, [...]); // 原生sql查询，支持参数化查询
 
    // 数据表建模
    const tasks = client.model('tasks', {
@@ -61,31 +63,29 @@ async function main() {
             sequence: true,
          },
          'state': 'boolean',
-         'address': [
-            {
-               'id': {
-                  type: 'integer',
-                  sequence: true
-               },
-               name: 'string',
-               'createdAt': {
-                  type: 'timestamp',
-                  default: 'now()',
-               },
-               'updatedAt': {
-                  type: 'timestamp',
-                  default: 'now()',
-               },
-            }
-         ],
+         'address': [{
+            'id': {
+               type: 'integer',
+               sequence: true
+            },
+            name: 'string',
+            'createdAt': {
+               type: 'timestamp',
+               default: 'now()',
+            },
+            'updatedAt': {
+               type: 'timestamp',
+               default: 'now()',
+            },
+         }],
          'test': 'object',
          'createdAt': {
-         type: 'timestamp',
-         default: 'now()',
+            type: 'timestamp',
+            default: 'now()',
          },
          'updatedAt': {
-         type: 'timestamp',
-         default: 'now()',
+            type: 'timestamp',
+            default: 'now()',
          },
       }],
       "area": 'string',
@@ -94,8 +94,8 @@ async function main() {
          'default': true,
       },
      'modes': 'jsonb',
-      'email': {
-         type: email,
+     'email': {
+         type: 'email',
       },
       "createdAt": {
          type: 'timestamp',
@@ -169,14 +169,23 @@ ormv.sync('user', 'increment');
 
 > 删除已有的数据表重新构建表结构。
 
+#### 示例
+
 ```js
+// 同步schema为public下的user表
+ormv.sync('public.user');
+
+// 使用重构模式，删除并重建user表（未指定schema，默认为public）
 ormv.sync('user', 'rebuild');
+
+// 使用增量模式，批量同步schema为admin下所有的表
+ormv.syncs('admin', 'rebuild');
 ```
 
-### 批量同步指定schema中的所有模型
+### 批量同步指定public中的所有模型
 
 ```js
-ormv.syncs('public');
+ormv.syncs('public', 'increment');
 ```
 
 ## 函数链
