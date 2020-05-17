@@ -26,7 +26,7 @@ const tasks = ormv.model('tasks', {
             type: 'integer',
             sequence: true
           },
-          name: 'string',
+          'name': 'string',
           'createdAt': {
             type: 'timestamp',
             default: 'now()',
@@ -49,11 +49,11 @@ const tasks = ormv.model('tasks', {
     }
   ],
   "area": 'string',
-  'state': {
+  "state": {
     'type': 'boolean',
     'default': true,
   },
-  'modes': 'jsonb',
+  "modes": 'jsonb',
   "createdAt": {
     type: 'timestamp',
     default: 'now()',
@@ -62,6 +62,6 @@ const tasks = ormv.model('tasks', {
     type: 'timestamp',
     default: 'now()',
   },
-})
+});
 
 module.exports = tasks;
