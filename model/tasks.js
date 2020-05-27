@@ -54,6 +54,7 @@ const tasks = ormv.model('tasks', {
     'default': true,
   },
   "modes": 'jsonb',
+  "ids": "integer[]",
   "createdAt": {
     type: 'timestamp',
     default: 'now()',

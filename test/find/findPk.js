@@ -15,8 +15,8 @@ test('findPk ', async t => {
 
    const result = await tasks
       .schema("public")
-      .findPk(89)
-      .select('id', 'keywords')
+      .findPk(1)
+      .select('id', 'keywords', 'ids')
       .catch(error => {
          const { message } = error;
          return {
@@ -24,6 +24,8 @@ test('findPk ', async t => {
             message
          }
       })
+
+   // console.log(result);
 
    const { error, data } = schema.strictVerify(result)
 

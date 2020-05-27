@@ -4,7 +4,7 @@ const test = require('jtf');
 const typea = require('typea');
 const { Ormv, model } = require('../../model/');
 
-const { $in, $as, $scope } = Ormv.Op;
+const { $in, $as, $scope, $includes } = Ormv.Op;
 const { tasks } = model;
 
 test('where', async t => {
@@ -21,7 +21,7 @@ test('where', async t => {
       },
       {
         state: true,
-        keywords: {}
+        keywords: $includes(565, 787)
       }
     )
     .limit(10)
