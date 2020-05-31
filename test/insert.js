@@ -12,6 +12,34 @@ test('insert tasks', async t => {
     .schema('public')
     .insert(
       {
+        id: 1,
+        uid: 6,
+        email: 'abs@xx.cc',
+        area: $sql('now()'),
+        state: false
+      },
+      { ignore: "id" }
+    )
+    .catch(error => {
+
+      return {
+        code: 1000,
+        error: String(error)
+      }
+
+    })
+
+  t.ok(!result, '');
+
+});
+
+
+test('insert update', async t => {
+
+  const result = await tasks
+    .schema('public')
+    .insert(
+      {
         // id: 1,
         uid: 6,
         email: 'abs@xx.cc',
@@ -49,7 +77,7 @@ test('insert tasks', async t => {
         ],
         state: false
       },
-      // { update: true }
+      { update: "id" }
     )
     .catch(error => {
 
