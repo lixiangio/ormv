@@ -47,7 +47,7 @@ test('update', async t => {
     .update(update)
     .where({ "id": $in(6, 8, 9) })
     .or({ "area": "11" })
-    .return()
+    .return("id", "area", "list", "keywords")
     .catch(error => {
       return {
         code: 1000,

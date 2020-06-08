@@ -11,5 +11,4 @@ const { ormv } = require('../model/');
 
 // ormv.sync('tasks', 'increment');
 
-
 // ormv.syncs('public');

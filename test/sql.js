@@ -27,7 +27,7 @@ test('sql', async t => {
          code: 1000,
          message
       }
-   })
+   });
 
    t.ok(!result1.code, result1.message);
 

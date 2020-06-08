@@ -111,6 +111,7 @@ async function main() {
 
    // 基于数据模型的结构化查询
    const result = await tasks
+      .schema("public")
       .select('id', 'keywords', $as("platform", "xx"))
       .where({
          id: $in(50, 51),
