@@ -9,14 +9,13 @@ const ormv = new Ormv({
    password: 'M2Idiftre&34FS',
    port: 5532,
    logger: true,
-   sync: true
 });
 
 ormv.connect(error => {
    if (error) {
-      console.log('pgsql ', error.stack);
+      console.error('pgsql ', error.stack);
    } else {
-      console.error('pgsql connect success');
+      console.log('pgsql connect success');
    }
 });
 

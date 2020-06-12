@@ -1,6 +1,6 @@
 'use strict';
 
-const { ormv } = require('../model/');
+// const { ormv } = require('../model/');
 
 // ormv.sync('user', 'increment');
 
@@ -8,7 +8,7 @@ const { ormv } = require('../model/');
 
 // ormv.sync('user', 'remove');
 
-
 // ormv.sync('tasks', 'increment');
 
-// ormv.syncs('public');
+
+// ormv.syncs('public', 'add');

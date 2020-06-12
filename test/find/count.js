@@ -13,6 +13,8 @@ test('count', async t => {
 
    const result = await Promise.all([query, count]);
 
+   // console.log(result)
+
    t.ok(result);
 
 })
@@ -30,6 +32,8 @@ test('find count', async t => {
             message
          }
       })
+
+   console.log(result)
 
    t.ok(result);
 
