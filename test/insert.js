@@ -30,6 +30,30 @@ test('insert tasks', async t => {
 });
 
 
+test('insert admin', async t => {
+
+  const result = await admin
+    .schema('public')
+    .insert({
+      uid: 6,
+      mobilePhone: '18555555556',
+      email: 'abs@xx.cc',
+      area: $sql('now()'),
+      state: false
+    })
+    .catch(error => {
+
+      return {
+        code: 1000,
+        error: String(error)
+      }
+
+    })
+
+  t.ok(result, result.error);
+
+});
+
 test('insert tasks ignore', async t => {
 
   const result = await tasks

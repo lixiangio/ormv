@@ -35,13 +35,16 @@ test('select', async t => {
     .or({ "area": "11" })
     .return("id", "area", "list", "keywords")
     .catch(error => {
+      transaction.rollback();
       return {
         code: 1000,
         message: String(error)
       }
     })
 
-  await transaction.commit();
+
+  // transaction.rollback();
+  transaction.commit();
 
   const schema = typea([{
     id: Number,

@@ -18,10 +18,14 @@ const admin = ormv.model('admin', {
          comment: "地址"
       }
    ],
+   'mobilePhone': {
+      type: 'mobilePhone',
+      uniqueIndex: true,
+   },
    'email': {
       type: 'email',
       uniqueIndex: true,
    },
-})
+});
 
 module.exports = admin;
