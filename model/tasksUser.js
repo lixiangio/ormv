@@ -4,7 +4,7 @@ const { ormv } = require('./index.js');
 require('./tasks.js');
 require('./user.js');
 
-const tasksUser = ormv.virtual('tasks innerJoin user', {
+module.exports = ormv.virtual('tasks innerJoin user', {
    id: "tasks",
    uid: "tasks",
    keywords: "tasks",
@@ -20,5 +20,3 @@ const tasksUser = ormv.virtual('tasks innerJoin user', {
    xxx: "user.age",
    ggr: "user.age",
 }, { 'tasks.uid': 'user.id' });
-
-module.exports = tasksUser;

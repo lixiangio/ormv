@@ -2,7 +2,7 @@
 
 const { ormv } = require('./index.js');
 
-const admin = ormv.model('admin', {
+module.exports = ormv.model('admin', {
    'id': {
       type: 'integer',
       primaryKey: true
@@ -27,5 +27,3 @@ const admin = ormv.model('admin', {
       uniqueIndex: true,
    },
 });
-
-module.exports = admin;

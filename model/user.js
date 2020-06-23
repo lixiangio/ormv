@@ -2,7 +2,7 @@
 
 const { ormv } = require('./index.js');
 
-const model = ormv.model('user', {
+module.exports = ormv.model('user', {
    'id': {
       type: 'integer',
       primaryKey: true,
@@ -21,5 +21,3 @@ const model = ormv.model('user', {
    'password': 'string',
    'email': 'string'
 });
-
-module.exports = model;

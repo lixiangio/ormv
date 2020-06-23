@@ -1,7 +1,7 @@
 'use strict';
 
 const test = require('jtf');
-const { Ormv, model } = require('../../model/');
+const { Ormv, model } = require('../../model');
 
 const { tasks } = model;
 const { $insertByPath, } = Ormv.Op;

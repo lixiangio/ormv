@@ -1,7 +1,7 @@
 'use strict';
 
 const test = require('jtf');
-const { Ormv, model } = require('../../model/');
+const { Ormv, model } = require('../../model');
 
 const { $insert, $sql } = Ormv.Op;
 const { tasks } = model;
@@ -21,7 +21,7 @@ test('update $insert', async t => {
          }
       })
 
-   t.ok(result);
+   t.ok(!result.error, result.error);
 
    console.log(result);
 

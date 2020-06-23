@@ -13,7 +13,6 @@ test('select', async t => {
   const transaction = await ormv.transaction();
 
   const result = await tasks
-    .schema()
     .transaction(transaction)
     .select('id', 'keywords', $as("area", "xx"), 'createdAt')
     .offset(2)

@@ -2,7 +2,7 @@
 
 const { ormv } = require('./index.js');
 
-const tasks = ormv.model('tasks', {
+module.exports = ormv.model('tasks', {
   'id': {
     "type": 'integer',
     "primaryKey": true,
@@ -64,5 +64,3 @@ const tasks = ormv.model('tasks', {
     default: 'now()',
   },
 });
-
-module.exports = tasks;
