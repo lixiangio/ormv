@@ -239,10 +239,6 @@ ormv.syncs('public', 'increment');
 
 * value `Number` - 限制返回结果数量
 
-#### model.count()
-
-查询数据总量
-
 ### update 函数链
 
 #### model.update(data)
