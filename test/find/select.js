@@ -30,27 +30,3 @@ test('select', async t => {
   t.ok(data, error);
 
 });
-
-test('find select', async t => {
-
-  const result = await tasks
-    .find()
-    .offset(2)
-    .limit(3)
-    .select('id', 'keywords', $as("area", "xx"), 'createdAt')
-    .catch(error => {
-      console.log(error);
-    })
-
-  const schema = typea([{
-    id: Number,
-    keywords: Object,
-    xx: String,
-  }])
-
-  const { error, data } = schema.looseVerify(result);
-
-  t.ok(data, error);
-
-})
-

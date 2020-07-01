@@ -16,7 +16,7 @@ test('findPk ', async t => {
    const result = await tasks
       .schema("public")
       .findPk(1)
-      .select('id', 'keywords', 'ids')
+      .return('id', 'keywords', 'ids')
       .catch(error => {
          const { message } = error;
          return {

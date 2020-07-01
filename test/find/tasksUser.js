@@ -46,16 +46,6 @@ test('select', async t => {
 
    const result = await tasksUser
       .find()
-      .select(
-         'id',
-         'uid',
-         'keywords',
-         'image',
-         'phone',
-         $as("email", "xx"),
-         'createdAt',
-         'updatedAt'
-      )
       .where({
          'id': $in(50, 51),
          keywords: {}
@@ -66,6 +56,16 @@ test('select', async t => {
       })
       .offset(0)
       .limit(3)
+      .return(
+         'id',
+         'uid',
+         'keywords',
+         'image',
+         'phone',
+         $as("email", "xx"),
+         'createdAt',
+         'updatedAt'
+      )
       .then(data => {
          return data
       })
