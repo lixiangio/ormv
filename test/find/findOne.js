@@ -37,4 +37,4 @@ test('findOne ', async t => {
       t.ok(data)
    }
 
-})
+});

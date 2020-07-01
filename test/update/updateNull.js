@@ -1,12 +1,12 @@
 'use strict';
 
 const test = require('jtf');
-const { Ormv, model } = require('../../model/');
+const { Ormv, model } = require('../../model');
 
 const { $in, } = Ormv.Op;
 const { tasks } = model;
 
-test('update', async t => {
+test('updateNull', async t => {
 
   const update = {
     id: 6,
@@ -20,14 +20,14 @@ test('update', async t => {
   }
 
   const result = await tasks
-    .updatePk(6, update)
+    .updatePk(111111111, update)
     .catch(error => {
       return {
         code: 1000,
         message: String(error)
       }
-    })
+    });
 
-  t.ok(result.id, result.message);
+  t.ok(result === null);
 
-})
+});

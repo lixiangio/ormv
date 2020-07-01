@@ -111,9 +111,7 @@ async function main() {
 
    // 基于数据模型的结构化查询
    const result = await tasks
-      .schema("public")
-      .select('id', 'keywords', $as("platform", "xx"))
-      .where({
+      .find({
          id: $in(50, 51),
          keywords: {}
       })
@@ -132,6 +130,7 @@ async function main() {
          "keywords": "desc"
       })
       .limit(10)
+      .return('id', 'keywords', $as("platform", "xx"))
 
 }
 ```
@@ -201,19 +200,13 @@ ormv.syncs('public', 'increment');
 
 
 
-### find、select 函数链
+### find 函数链
 
 #### model.find(and)
 
 * and `Object` - and过滤条件
 
 查询多条记录
-
-#### model.select(field, ...)
-
-* [field] `String` - 字段名
-
-查询多条记录，选择返回字段
 
 #### model.findOne(and)
 
@@ -263,7 +256,9 @@ ormv.syncs('public', 'increment');
 
 删除指定主键的数据
 
-### 通用逻辑函数链 where(options).and.(options)or.(options)
+### 通用函数链
+
+#### 逻辑函数链 where(options).and(options).or(options)
 
 逻辑函数链同时适用于find、update、delete操作。支持多个options参数，每个options内的子节点之间为and关系，options与options之间为or关系
 
@@ -274,6 +269,10 @@ ormv.syncs('public', 'increment');
 ```js
 model.where(options, ...).or(options, ...).and(options, ...);
 ```
+
+#### return()、noReturn()
+
+增删改查操作均支持return()、noReturn()函数，用于定义返回列
 
 <!-- ### 事务 -->
 

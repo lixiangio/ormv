@@ -7,8 +7,7 @@ const { Ormv, ormv, model } = require('../model/');
 const { $in, $as } = Ormv.Op;
 const { tasks } = model;
 
-
-test('select', async t => {
+test('transaction', async t => {
 
   const transaction = await ormv.transaction();
 
@@ -21,15 +20,13 @@ test('select', async t => {
       console.log(error);
     })
 
-  const update = {
-    area: "11",
-    area: null,
-    state: true
-  }
-
   await tasks
     .transaction(transaction)
-    .update(update)
+    .update({
+      area: "11",
+      area: null,
+      state: true
+    })
     .where({ "id": $in(6, 8, 9) })
     .or({ "area": "11" })
     .return("id", "area", "list", "keywords")

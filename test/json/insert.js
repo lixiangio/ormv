@@ -21,8 +21,8 @@ test('update $insert', async t => {
          }
       })
 
-   t.ok(!result.error, result.error);
+   t.ok(result.id);
 
-   console.log(result);
+   // console.log(result);
 
 })

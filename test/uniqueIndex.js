@@ -24,5 +24,3 @@ test('uniqueIndex', async t => {
   t.ok(!result.error, result.error);
 
 });
-
-

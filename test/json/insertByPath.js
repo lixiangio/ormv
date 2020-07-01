@@ -20,8 +20,8 @@ test('update $insertByPath', async t => {
          }
       })
 
-   t.ok(result);
+   t.ok(result.id);
 
-   console.log(result);
+   // console.log(result);
 
 })

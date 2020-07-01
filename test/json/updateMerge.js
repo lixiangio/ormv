@@ -23,7 +23,7 @@ test('updateMerge', async t => {
          }
       })
 
-   t.deepEqual(result, { rowCount: 1 });
+   t.ok(result.id);
 
 })
 

@@ -35,7 +35,7 @@ test('where', async t => {
   const schema = typea([{
     id: Number,
     keywords: Object,
-    xx: String,
+    xx: Boolean,
   }]);
 
   const { error, data } = schema.looseVerify(result);
@@ -76,7 +76,7 @@ test('where', async t => {
   const schema = typea([{
     id: Number,
     keywords: Object,
-    xx: String,
+    xx: Boolean,
   }]);
 
   const { error, data } = schema.looseVerify(result);
@@ -113,7 +113,7 @@ test('where $scope', async t => {
   const schema = typea([{
     id: Number,
     keywords: Object,
-    xx: String,
+    xx: Boolean,
   }]);
 
   const { error, data } = schema.looseVerify(result);
