@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('jtf');
+const test = require('jmr');
 const typea = require('typea');
 const { Ormv, model } = require('../../model/');
 const { find } = require('../../model/vTasks');
@@ -18,6 +18,8 @@ test('select', async t => {
     .catch(error => {
       console.log(error);
     })
+
+  console.log(result);
 
   const schema = typea([{
     id: Number,
