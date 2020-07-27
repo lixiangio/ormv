@@ -1,8 +1,8 @@
 'use strict';
 
 const test = require('jmr');
-const Ormv = require('../lib/index.js');
-const { model } = require('../model/');
+
+const { Ormv, model } = test;
 
 const { tasks } = model;
 

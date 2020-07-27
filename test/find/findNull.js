@@ -1,7 +1,7 @@
 'use strict'
 
 const test = require('jmr');
-const { model } = require('../../model');
+const { model } = test;
 
 const { tasks } = model;
 

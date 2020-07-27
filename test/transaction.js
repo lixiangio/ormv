@@ -2,7 +2,7 @@
 
 const test = require('jmr');
 const typea = require('typea');
-const { Ormv, ormv, model } = require('../model/');
+const { Ormv, ormv, model } = test;
 
 const { $in, $as } = Ormv.Op;
 const { tasks } = model;

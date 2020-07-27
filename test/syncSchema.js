@@ -1,6 +1,7 @@
 'use strict';
 
-const { ormv } = require('../model/');
+const test = require('jmr');
+const { ormv } = test;
 
 // ormv.sync('user', 'increment');
 

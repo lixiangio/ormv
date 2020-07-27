@@ -2,7 +2,7 @@
 
 const test = require('jmr');
 const typea = require('typea');
-const { Ormv, model } = require('../../model');
+const { Ormv, model } = test;
 
 const { tasks } = model;
 

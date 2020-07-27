@@ -1,7 +1,7 @@
 'use strict';
 
 const test = require('jmr');
-const { Ormv, model } = require('../../model');
+const { Ormv, model } = test;
 
 const { $insertFirst, } = Ormv.Op;
 const { tasks } = model;
