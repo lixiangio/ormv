@@ -20,7 +20,7 @@ const { tasks } = model;
 test('findOne ', async t => {
 
    const result = await tasks
-      .findOne({ id: 88, })
+      .findOne({ id: 88 })
       .order({
          "id": "desc",
          "keywords": "desc"

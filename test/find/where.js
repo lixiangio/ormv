@@ -7,6 +7,8 @@ const { Ormv, model } = require('../../model/');
 const { $in, $as, $scope, $includes } = Ormv.Op;
 const { tasks } = model;
 
+console.log($includes(565, 787)())
+
 test('where', async t => {
 
   const result = await tasks
