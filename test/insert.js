@@ -7,7 +7,7 @@ const { Ormv, model } = test;
 const { $sql } = Ormv.Op;
 const { tasks, admin } = model;
 
-test('insert tasks', async t => {
+test('tasks', async t => {
 
   const result = await tasks
     .schema('public')
@@ -31,7 +31,7 @@ test('insert tasks', async t => {
 });
 
 
-test('insert admin', async t => {
+test('admin', async t => {
 
   const result = await admin
     .schema('public')
@@ -56,16 +56,16 @@ test('insert admin', async t => {
 });
 
 
-test('insert update', async t => {
+test('update', async t => {
 
   const data = {
     // id: 1,
     uid: 6,
     email: 'abs@xx.cc',
-    area: $sql('now()'),
+    area: '\\6666666666',
     keywords: {
       state: false,
-      area: `k'k'kk"k<script type="text/javascript" src="/app.js"></script>`
+      area: `\\k'k'kk"k<script\n\t type="text/javascript" src="/app.js"></script>`
     },
     list: [
       {
@@ -115,7 +115,7 @@ test('insert update', async t => {
 });
 
 
-test('insert tasks ignore', async t => {
+test('ignore', async t => {
 
   const result = await tasks
     .schema('public')
@@ -141,11 +141,12 @@ test('insert tasks ignore', async t => {
 });
 
 
-test('insert return', async t => {
+test('return', async t => {
 
   const result = await tasks
     .schema('public')
     .insert({
+      id: 101,
       uid: 6,
       email: 'abs@xx.cc',
       area: $sql('now()'),
