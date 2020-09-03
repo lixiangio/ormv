@@ -146,13 +146,13 @@ test('return', async t => {
   const result = await tasks
     .schema('public')
     .insert({
-      id: 101,
+      // id: 101111,
       uid: 6,
       email: 'abs@xx.cc',
       area: $sql('now()'),
       state: false
     })
-    .return('uid','state')
+    .return('uid', 'state')
     .catch(error => {
 
       return {

@@ -26,7 +26,7 @@ test('update', async t => {
         code: 1000,
         message: String(error)
       }
-    })
+    });
 
   t.ok(result.id, result.message);
 
