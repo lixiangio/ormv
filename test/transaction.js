@@ -1,7 +1,5 @@
-'use strict';
-
-const test = require('jmr');
-const typea = require('typea');
+import test from 'jtm';
+import typea from 'typea';
 const { Ormv, ormv, model } = test;
 
 const { $in, $as } = Ormv.Op;

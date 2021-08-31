@@ -1,8 +1,6 @@
-'use strict';
+import ormv from './ormv.js';
 
-const { ormv } = require('./index.js');
-
-module.exports = ormv.model('user', {
+export default ormv.model('user', {
    'id': {
       type: 'integer',
       primaryKey: true,

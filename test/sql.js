@@ -1,6 +1,4 @@
-'use strict';
-
-const test = require('jmr');
+import test from 'jtm';
 const { Ormv, ormv, model } = test;
 
 const { $sql, $in, $as } = Ormv.Op;

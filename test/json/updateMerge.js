@@ -1,7 +1,5 @@
-'use strict'
-
-const test = require('jmr');
-const typea = require('typea');
+import test from 'jtm';
+import typea from 'typea';
 const { Ormv, model } = test;
 
 const { tasks } = model;

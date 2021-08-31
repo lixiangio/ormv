@@ -1,7 +1,5 @@
-'use strict';
-
-const test = require('jmr');
-const { model } = require('../../model/');
+import test from 'jtm';
+import { model } from '../../model/index.js';
 
 const { tasks } = model;
 

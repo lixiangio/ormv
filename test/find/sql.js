@@ -1,8 +1,6 @@
-'use strict'
-
-const test = require('jmr');
-const typea = require('typea');
-const { Ormv, model } = require('../../model/');
+import test from 'jtm';
+import typea from 'typea';
+import { Ormv, model } from '../../model/index.js';
 
 const { $sql } = Ormv.Op;
 const { tasks } = model;

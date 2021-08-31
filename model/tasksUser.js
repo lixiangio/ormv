@@ -1,10 +1,8 @@
-'use strict';
+import ormv from './ormv.js';
+import './tasks.js';
+import './user.js';
 
-const { ormv } = require('./index.js');
-require('./tasks.js');
-require('./user.js');
-
-module.exports = ormv.virtual('tasks innerJoin user', {
+export default ormv.virtual('tasks innerJoin user', {
    id: "tasks",
    uid: "tasks",
    keywords: "tasks",

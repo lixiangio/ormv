@@ -1,8 +1,6 @@
-'use strict'
-
-const test = require('jmr');
-const typea = require('typea');
-const { model } = require('../../model/');
+import test from 'jtm';
+import typea from 'typea';
+import { model } from '../../model/index.js';
 
 const schema = typea({
    id: Number,

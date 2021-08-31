@@ -1,7 +1,5 @@
-'use strict';
-
-const test = require('jmr');
-const typea = require('typea');
+import test from 'jtm';
+import typea from 'typea';
 const { Ormv, model } = test;
 
 const { $as } = Ormv.Op;
@@ -28,7 +26,7 @@ test('select', async t => {
 
   t.ok(data, error);
 
-})
+});
 
 test('insert', async t => {
 

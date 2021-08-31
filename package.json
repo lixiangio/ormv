@@ -1,17 +1,21 @@
 {
   "name": "ormv",
   "version": "3.2.7",
+  "type": "module",
   "description": "Postgresql ORM，为简化JSON操作定制",
-  "main": "lib/index.js",
+  "main": "build/index.js",
+  "types": "types/index.d.ts",
   "dependencies": {
-    "pg": "^8.3.0",
-    "validator": "^13.1.1"
+    "pg": "^8.7.1"
   },
   "devDependencies": {
-    "typea": "^5.2.0"
+    "jtm": "^1.0.4",
+    "typea": "^5.3.3"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "test": "jtm"
   },
   "files": [
     "lib"
@@ -29,6 +33,5 @@
   "bugs": {
     "url": "https://github.com/xiangle/ormv/issues"
   },
-  "homepage": "https://github.com/xiangle/ormv#readme",
-  "types": "index.d.ts"
+  "homepage": "https://github.com/xiangle/ormv#readme"
 }

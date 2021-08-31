@@ -1,9 +1,7 @@
-'use strict';
+import ormv from './ormv.js';
 
-const { ormv } = require('./index.js');
-
-require('./tasks.js');
-require('./user.js');
+import './tasks.js';
+import './user.js';
 
 const vTasks = ormv.virtual('tasks', {
    id: "tasks",
@@ -27,4 +25,4 @@ const vTasks = ormv.virtual('tasks', {
 //    'updatedAt'
 // ]);
 
-module.exports = vTasks;
+export default vTasks;
